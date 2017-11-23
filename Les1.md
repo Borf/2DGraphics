@@ -65,9 +65,11 @@ public class Line2DDemo extends JPanel
 Deze code zal een lijn tekenen van de coordinaat (200,100) naar (500,200)
 
 # Kleuren
-
+De Graphics klasse slaat op met welke kleur getekend gaat worden. Deze kleur kun je veranderen, en alle opvolgende teken-commandos zullen met deze kleur getekend worden. 
 
 # Transformaties
+## 2D Rendering pipeline
 
 
 # Parametrische vergelijkingen
+
