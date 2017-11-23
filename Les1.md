@@ -7,8 +7,26 @@ Java2D is te gebruiken door via een [Graphics2D](https://docs.oracle.com/javase/
 ```java
 public class Java2DDemo extends JPanel
 {
+    public static void main(String[] args)
+    {
+        JFrame frame = new JFrame("Java2D");
+        frame.setSize(800, 600);
+        frame.setContentPane(new Java2DDemo());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+    }
 
+    Java2DDemo()
+    {
+//init
+    }
 
+    public void paintComponent(Graphics g)
+    {
+        super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D)g;
+//teken
+    }
 
 }
 ```
