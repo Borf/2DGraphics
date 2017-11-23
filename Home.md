@@ -1,6 +1,0 @@
-[Les1](Les 1 - Java2D, Lijnen, Kleuren, Basistransformaties)
-[Les2](Les 2)
-[Les3](Les 3)
-[Les4](Les 4)
-[Les5](Les 5)
-[Les6](Les 6)
