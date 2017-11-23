@@ -1,4 +1,4 @@
-- [Les1](Les 1 - Java2D, Lijnen, Kleuren, Basistransformaties)
+- [Les 1 - Java2D, Lijnen, Kleuren, Basistransformaties](Les1)
 - [Les2](Les 2)
 - [Les3](Les 3)
 - [Les4](Les 4)
