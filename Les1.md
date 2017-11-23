@@ -4,12 +4,14 @@ Java2D is een API om binnen java met 2D graphics te werken. Deze API bestaat uit
 # Makkelijk gebruiken
 Java2D is te gebruiken door via een [Graphics2D](https://docs.oracle.com/javase/7/docs/api/java/awt/Graphics2D.html) object. Dit object komt intern uit java, en kan gebruikt worden om op verschillende dingen te tekenen, zoals een JPanel. Om op een JPanel te tekenen kunnen we de volgende code gebruiken:
 
-`public class Java2DDemo extends JPanel
+```java
+public class Java2DDemo extends JPanel
 {
 
 
 
-}`
+}
+```
 
 # Lijnen
 
