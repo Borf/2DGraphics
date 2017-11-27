@@ -155,7 +155,9 @@ public void paintComponent(Graphics g)
 	}
 }
 ```
-Deze code schaalt het scherm met een factor 50, tekent een assenstelsel, en maakt hierna de grafiek y = sin(x), waarbij x van -10 tot 10 loopt. Bij het uitvoeren van deze code, zien we echter een probleem ontstaan, de lijnen zijn ook opgeschaald en erg dik geworden. <div style="float: right">[![probleem](les1/scaleproblem_t.png)](les1/scaleproblem.png)</div> Dit is op 2 manieren op te lossen; door de lijndikte kleiner te maken tot 1/50, of door de schaling niet te doen met de scale methode, maar door alleen de coördinaten te vermenigvuldigen met een schalingsfactor. De tweede manier heeft in dit geval de voorkeur. Dit levert de volgende code op
+[![probleem](les1/scaleproblem_t.png)](les1/scaleproblem.png)
+
+Deze code schaalt het scherm met een factor 50, tekent een assenstelsel, en maakt hierna de grafiek y = sin(x), waarbij x van -10 tot 10 loopt. Bij het uitvoeren van deze code, zien we echter een probleem ontstaan, de lijnen zijn ook opgeschaald en erg dik geworden.  Dit is op 2 manieren op te lossen; door de lijndikte kleiner te maken tot 1/50, of door de schaling niet te doen met de scale methode, maar door alleen de coördinaten te vermenigvuldigen met een schalingsfactor. De tweede manier heeft in dit geval de voorkeur. Dit levert de volgende code op
 ```java
 public void paintComponent(Graphics g)
 {
@@ -183,8 +185,16 @@ public void paintComponent(Graphics g)
 	}
 }
 ```
-Let hierbij op dat de schaling pas bij het tekenen toegepast wordt, niet al in de berekeningen
+Let hierbij op dat de schaling pas bij het tekenen toegepast wordt, niet al in de berekeningen. Nu krijgen we wel het gewenste resultaat. Het is nu triviaal om de schaal aan te passen, of een andere formule te gebruiken. Let wel op de resolution variabele, deze geeft de tussenstap tussen pixels aan. Als deze te klein is, wordt het tekenen erg langzaam, te groot en de grafiek berekent niet voor iedere pixel een juiste coördinaat
 
 # Opgaven
-1. 
-2. 
+We gaan deze periode met IntelliJ werken. Maak voor iedere week een project met submodulen voor iedere opgave. Hiernaast is het gemakkelijk een template-project te gebruiken. De code voor een template vind je in het hoofdstuk [Makkelijk Gebruiken](#makkelijk-gebruiken)
+1. Schrijf een programma dat een huis tekent. Het huis bestaat uit een basis met een puntdak, en een deur. Dit is een lijntekening en is dus een simpele vorm, zoals ![huis](les1/house.png) 
+2. Schrijf een programma dat de grafiek Y = X³ tekent. Let op de schaalverdeling van de assen, en zorg dat de grafiek goed in beeld te zien is. Het kan in dit geval verstandig zijn om de schaalverdeling op de X en Y as anders te nemen.
+3. Schrijf een programma dat een spiraal tekent. Voor een spiraal kun je de formules gebruiken in het [poolcoördinaten-stelsel](https://nl.wikipedia.org/wiki/Poolcoördinaten). Door de formule `Ø = n × R` te gebruiken, krijg je een spiraalfiguur. hierin is n een constante de afstand tussen de spiraal aan te passen. Je kunt hier bijvoorbeeld 1 voor nemen. Om hierna van poolcoördinaten naar carthesische te gaan kun je de sinus en cosinus gebruiken:
+```
+x = r × cos(Ø)
+y = r × sin(Ø)
+```
+4. Schrijf een applicatie die een regenboog tekent, waar aan de linkerkant van de regenboog rood zit, en de rechterkant ook weer rood, met alle kleuren van het hue-spectrum ertussenin
+![rainbow](les1/rainbow.png)
