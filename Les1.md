@@ -196,5 +196,18 @@ We gaan deze periode met IntelliJ werken. Maak voor iedere week een project met 
 x = r × cos(Ø)
 y = r × sin(Ø)
 ```
-4. Schrijf een applicatie die een regenboog tekent, waar aan de linkerkant van de regenboog rood zit, en de rechterkant ook weer rood, met alle kleuren van het hue-spectrum ertussenin
+4. Schrijf een applicatie die een regenboog tekent, waar aan de linkerkant van de regenboog rood zit, en de rechterkant ook weer rood, met alle kleuren van het hue-spectrum ertussenin. Het is niet heel erg als er witte lijnen tussen sommige van de segmenten zitten. Je kunt de lijnen tekenen door de punten op een cirkel te berekenen. Deze punten kun je met dezelfde formules berekenen als bij opgave 3, maar met een andere straal
 ![rainbow](les1/rainbow.png)
+5. Spirograaf is een instrument dat gebruikt kan worden om patronen te tekenen. Het werkt door een tandwiel dat binnen een ander tandwiel draait. Voor meer informatie zie [spiroraaf](https://nl.wikipedia.org/wiki/Spirograaf)
+
+    Maak een java-applicatie maken om spirograaf figuren te tekenen. Dit is eigenlijk vergelijkbaar met een parametrische vergelijking
+  
+    Zorg dat je programma verschillende spirograaf figuren kan tekenen
+Voor inspiratie, zie ook http://nathanfriend.io/inspirograph/. Het gaat dus niet om de animatie, maar alleen om de uiteindelijke figuur. Zorg dat je applicatie bij het configureerbaar is om verschillende (of misschien zelfs willekeurige) figuren te tekenen. Maak ook gebruik van kleuren
+
+    Voor het tekenen van de spirograaf kun je gebruik maken van de generieke formules
+```
+x = a × cos(b × ø) + c × cos(d × ø)
+y = a × sin(b × ø) + c × cos(d × ø)
+```
+Dit zijn versimpelde formules, op wikipedia staan net iets andere formules, beide werken goed
