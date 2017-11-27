@@ -65,7 +65,40 @@ public class Line2DDemo extends JPanel
 Deze code zal een lijn tekenen van de coordinaat (200,100) naar (500,200)
 
 # Kleuren
-De Graphics klasse slaat op met welke kleur getekend gaat worden. Deze kleur kun je veranderen, en alle opvolgende teken-commandos zullen met deze kleur getekend worden. 
+De Graphics klasse slaat op met welke kleur getekend gaat worden. Deze kleur kun je veranderen, en alle opvolgende teken-commandos zullen met deze kleur getekend worden. De kleur kun je aanpassen met de setColor(Color color) methode. Kleuren kunnen op verschillende manieren aangemaakt worden:
+- ```new Color(float r, float g, float b)``` Maakt een kleur aan met rood, groen, blauw waarden. De parameters liggen tussen 0 en 1
+- ```new Color(int r, int g, int b)``` Maakt een kleur aan met rood, groen, blauw waarden. De parameters liggen tussen 0 en 255
+- ```Color.getHSBColor(float hue, float saturation, float brightness)``` Maakt een kleur aan volgens het HSB model. Met de hue kun je een kleur instellen, de saturation is de kleurverzadiging en de brightness de helderheid. De parameters liggen tussen 0 en 1, dus Color.getHSBColor(0.0f, 1.0f, 1.0f) geeft rood
+- ```Color.black, Color.white, Color.green``` Kleur-constanten zijn binnen java gedefinieerd als vaste basiskleuren die je gemakkelijk kunt gebruiken
+
+Door nu een kleur aan te maken, en deze te zetten in het Graphics object, kun je bijvoorbeeld lijnen tekenen met deze kleur. Door steeds nieuwe kleuren te maken kunnen we een heel kleurenpallet maken
+```
+import javax.swing.*;
+import java.awt.*;
+
+public class HelloColors extends JPanel {
+	public static void main(String[] args)
+	{
+		JFrame frame = new JFrame("Hello Java2D");
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		frame.setMinimumSize(new Dimension(800, 600));
+		frame.setExtendedState(frame.getExtendedState() | JFrame.MAXIMIZED_BOTH);
+		frame.setContentPane(new HelloColors());
+		frame.setVisible(true);
+	}
+
+	public void paintComponent(Graphics g)
+	{
+		super.paintComponent(g);
+		Graphics2D g2d = (Graphics2D)g;
+
+		for(int i = 0; i < 500; i++) {
+			g2d.setColor(Color.getHSBColor(i/500.0f, 1, 1));
+			g2d.drawLine(i, 10, i, 100);
+		}
+	}
+}
+```
 
 # Transformaties
 ## 2D Rendering pipeline
