@@ -65,13 +65,20 @@ public class Line2DDemo extends JPanel
 Deze code zal een lijn tekenen van de coordinaat (200,100) naar (500,200)
 
 # Kleuren
-De Graphics klasse slaat op met welke kleur getekend gaat worden. Deze kleur kun je veranderen, en alle opvolgende teken-commandos zullen met deze kleur getekend worden. De kleur kun je aanpassen met de setColor(Color color) methode. Kleuren kunnen op verschillende manieren aangemaakt worden:
-- ```new Color(float r, float g, float b)``` Maakt een kleur aan met rood, groen, blauw waarden. De parameters liggen tussen 0 en 1
-- ```new Color(int r, int g, int b)``` Maakt een kleur aan met rood, groen, blauw waarden. De parameters liggen tussen 0 en 255
-- ```Color.getHSBColor(float hue, float saturation, float brightness)``` Maakt een kleur aan volgens het HSB model. Met de hue kun je een kleur instellen, de saturation is de kleurverzadiging en de brightness de helderheid. De parameters liggen tussen 0 en 1, dus Color.getHSBColor(0.0f, 1.0f, 1.0f) geeft rood
-- ```Color.black, Color.white, Color.green``` Kleur-constanten zijn binnen java gedefinieerd als vaste basiskleuren die je gemakkelijk kunt gebruiken
+De Graphics klasse slaat op met welke kleur getekend gaat worden. Deze kleur kun je veranderen, en alle opvolgende teken-commandos zullen met deze kleur getekend worden. De kleur kun je aanpassen met de setColor(Color color) methode. Kleuren kunnen op verschillende manieren aangemaakt worden, via de [Color](https://docs.oracle.com/javase/7/docs/api/java/awt/Color.html) klasse:
+- ```new Color(float r, float g, float b)```
+  
+  Maakt een kleur aan met rood, groen, blauw waarden. De parameters liggen tussen 0 en 1. ```new Color(1.0f, 1.0f, 1.0f)``` geeft dus een witte kleur
+- ```new Color(int r, int g, int b)``` 
 
-Door nu een kleur aan te maken, en deze te zetten in het Graphics object, kun je bijvoorbeeld lijnen tekenen met deze kleur. Door steeds nieuwe kleuren te maken kunnen we een heel kleurenpallet maken
+  Maakt een kleur aan met rood, groen, blauw waarden. De parameters liggen tussen 0 en 255
+- ```Color.getHSBColor(float hue, float saturation, float brightness)``` 
+
+  Maakt een kleur aan volgens het HSB model. Met de hue kun je een kleur instellen, de saturation is de kleurverzadiging en de brightness de helderheid. De parameters liggen tussen 0 en 1, dus Color.getHSBColor(0.0f, 1.0f, 1.0f) geeft rood
+- ```Color.black, Color.white, Color.green``` 
+  Kleur-constanten zijn binnen java gedefinieerd als vaste basiskleuren die je gemakkelijk kunt gebruiken. De volledige lijst kun je vinden in [de java documentatie](https://docs.oracle.com/javase/7/docs/api/java/awt/Color.html#black)
+
+Door nu een kleur aan te maken, en deze te zetten in het Graphics object, kun je bijvoorbeeld lijnen tekenen met deze kleur. Door steeds nieuwe kleuren te maken kunnen we verschillende lijnen tekenen met verschillende kleuren
 ```
 import javax.swing.*;
 import java.awt.*;
@@ -99,10 +106,21 @@ public class HelloColors extends JPanel {
 	}
 }
 ```
+Deze code zal dus 500 lijnen tekenen, met ieder een andere kleur op basis van het HSB model. De hue verloopt hierbij van 0° tot 360°, waardoor je het hele kleurenspectrum te zien krijgt
 
 # Transformaties
-## 2D Rendering pipeline
+Het standaard coordinatenstelsel in java2D heeft de oorsprong in de linkerbovenhoek van het scherm zitten, waarbij de Y-as naar beneden gaat. Soms is dit echter onhandig met het tekenen, en is het bijvoorbeeld handiger om dit assenstelsel aan te kunnen passen. Dit kan in de computer graphics met 3 verschillende acties
+- **Transleren**
 
+  Transleren ofwel verplaatsen, verplaatst de oorsprong van het coordinatenstelsel. Dit kun je dus bijvoorbeeld gebruiken om de oorsprong op het centrum van het venster te leggen. We kunnen dit doen met de ```translate(double x, double y)``` methode in het Graphics2D object. Door ```g2d.translate(100,100);``` uit te voeren, verplaatsen we de oorsprong naar de pixel-coordinaat (100,100) in het venster. Met ```g2d.translate(getWidth()/2, getHeight()/2);``` kunnen we de hoogte en breedte van het paneel opvragen, en komt de oorsprong in het midden van het venster te liggen.
+- **Roteren**
+
+  Rotatie draait het coordinatenstelsel rond de oorsprong
+- **Schalen**
+
+  Schalen vergroot of verkleint het coordinatenstelsel vanuit de oorsprong.
+
+## Combineren van transformaties
 
 # Parametrische vergelijkingen
 
