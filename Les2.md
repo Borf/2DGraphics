@@ -178,9 +178,27 @@ Stroke s = new BasicStroke(4.0f,
 ```
 Deze waarden zijn integer constanten in de BasicStroke klasse, en kunnen gebruikt worden in de constructor. In het geval van de JOIN_MITER, kun je ook een extra parameter aan de constructor meegeven die de limiet van de miter-join aangeeft. Deze limiet is de diagonale afstand van de miter, dus de afstand tussen de binnenste en buitenste hoek. Standaard staat deze op 10.0f.
 
-Daarnaast is het ook mogelijk een streep-patroon mee te geven. Deze streep
+![dashes](les2/dash.png)
+Daarnaast is het ook mogelijk een streep-patroon mee te geven. Deze patronen kun je in een array doorgeven en je kunt een verschuiving aangeven in een parameter. In de array staat de lengte van de gekleurde gebieden en hierna de lengte van de nietgekleurde gebieden. Het is dus eigenlijk altijd een array met een even aantal elementen. Door de verschuiving kun je aangeven waar in het patroon begint
 
 # Paints
+De ```Graphics2D.fill()``` methode kan een vorm invullen. Standaard is dit met een enkele kleur, maar dit kun je instellen met de ```Graphics2D.setPaint(Paint paint)``` methode. Hier kun je een paint object meegeven, dat bepaalt hoe de vorm gevuld wordt.
+
+## Color
+De color klasse implementeerd ook de Paint interface, en kun je gebruiken om een Shape in 1 kleur in te kleuren. De kleur kun je aanmaken met alle constructoren van Color, op dezelfde manier als [setColor](Les1#Kleuren)
+
+## GradientPaint
+![Gradientpaint](les2/gradientpaint.png)
+
+Een gradientpaint maak je aan met 2 punten en 2 kleuren. Java zal dan lineair interpoleren over een lijn die tussen deze 2 punten loopt. Je kunt in de constructor ook aangeven of deze gradient cyclisch of asyclisch is. Een cyclische gradient zal zichzelf blijven herhalen na de 2 punten, en een acyclische gradienet blijft dezelfde kleur na deze 2 punten
+
+## MultipleGradientPaint
+
+## LinearGradientPaint
+
+## RadialGradientPaint
+
+## TexturePaint
 
 # Transformeren van shapes
 
