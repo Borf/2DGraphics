@@ -79,8 +79,106 @@ Als we deze vorm gaan opvullen, krijgen we een probleem, welke onderdelen worden
   We trekken weer een virtuele lijn door de vorm heen. Daarnaast geven we alle lijnen een richting (de richting waarin ze zijn getekent). Als we nu onze virtuele lijn volgen en de rand van de shape kruis van rechts, halen we 1 van de teller af, van links tellen we 1 bij de teller op. De plaatsen waar de teller 0 is zijn buiten de shape, op plaatsen waar de teller iets anders dan 0 is is binnen de shape.
 
 # Areas en Constructive Solid Geometry
+Een andere manier van 't maken van vormen is Constructive Solid Geometry. Dit is in het kort het combineren van 2 vormen om een nieuwe vorm te maken. Dit kunnen we doen met 3 operaties
+
+## Vereniging (add)
+![add](les2/csg_add.png)
+
+Door de vereniging te nemen van 2 vormen, krijg je een nieuwe vorm met een combinatie van beide vormen. Er komt 1 nieuwe vorm uit, en de lijnstukken die tussen de 2 vormen in zitten, vallen weg
+
+## Verschil (subtract)
+![subtract](les2/csg_subtract.png)
+
+Geeft eerste vorm, waar de tweede vorm als een hap uitgenomen is. Dit kan gaten opleven in de vorm. Let op de volgorde van de vormen, het verschil tussen vorm A en B, en B en A is anders.
+
+## Doorsnede (intersect)
+![intersect](les2/csg_intersect.png)
+
+Geeft alleen de ruimte die beide vormen zit. 
+
+## Exclusieve of (xor)
+![xor](les2/csg_xor.png)
+
+Geeft alleen de ruimte die of in de een, of in de andere vorm zit, maar niet allebei. Is gelijk aan ```Verschil(Vereniging(A, B), Doorsnede(A, B))```
+
+## Gebruik van CSG
+In java werkt CSG door middel van de [Area](https://docs.oracle.com/javase/7/docs/api/java/awt/geom/Area.html) klasse. Deze klasse is ook een Shape, en kan gemaakt worden op basis van een shape in de constructor. Door een bestaande Shape in een Area te encapsuleren kun je dus gemakkelijk CSG operaties hierop toepassen, en het resultaat kun je meteen tekenen.
+```java
+public void paintComponent(Graphics g)
+{
+    super(g);
+    Graphics2D g2d = (Graphics2D)g;
+
+    Area a = new Area(new Ellipse2D.Double(0,0,100,100));
+    Area b = new Area(new Ellipse2D.Double(50,0,100,100));
+
+    Area added = new Area(a);
+    added.add(b);
+
+    Area sub = new Area(a);
+    sub.subtract(b);
+
+    Area intersect = new Area(a);
+    intersect.intersect(b);
+
+    Area xor = new Area(a);
+    xor.exclusiveOr(b);
+
+    g2d.translate(25,25);
+
+    g2d.setColor(Color.lightGray);
+    g2d.fill(added);
+    g2d.setColor(Color.black);
+    g2d.draw(a);
+    g2d.draw(b);
+
+    g2d.translate(0,150);
+    g2d.setColor(Color.lightGray);
+    g2d.fill(sub);
+    g2d.setColor(Color.black);
+    g2d.draw(a);
+    g2d.draw(b);
+
+    g2d.translate(0,150);
+    g2d.setColor(Color.lightGray);
+    g2d.fill(intersect);
+    g2d.setColor(Color.black);
+    g2d.draw(a);
+    g2d.draw(b);
+
+    g2d.translate(0,150);
+    g2d.setColor(Color.lightGray);
+    g2d.fill(xor);
+    g2d.setColor(Color.black);
+    g2d.draw(a);
+    g2d.draw(b);
+}
+```
+Het is natuurlijk ook mogelijk om verschillende operaties achter elkaar uit te voeren op 1 Area, bijvoorbeeld door er een aantal keer verschillene stukjes af te hakken. 
+
+
+Je kunt CSG gebruiken om nieuwe vormen te maken, maar je kunt er nog meer mee doen
+- Overlap detecteren
+- Onwikkelen van grote complexe vormen (levels)
 
 # Strokes
+De ```Graphics2D.draw()``` methode tekent standaard een simpele lijn. Deze lijn noemen we een '[Stroke](https://docs.oracle.com/javase/7/docs/api/java/awt/Stroke.html)'. De stroke kun je instellen met de [```setStroke(Stroke newStroke)```](https://docs.oracle.com/javase/7/docs/api/java/awt/Graphics2D.html#setStroke(java.awt.Stroke)) methode. Een van de stroke-klassen is de [BasicStroke](https://docs.oracle.com/javase/7/docs/api/java/awt/BasicStroke.html). Met deze stroke kun je de dikte instellen, het soort afrondingen aan het einde van de lijn, en hoe de knikken in de lijnstukken getekend worden. Daarnaast kun je ook een streeppatroon instellen. Dit kan allemaal met de ```BasicStroke(float width, int cap, int join, float miterlimit, float[] dash, float dash_phase)``` constructor, maar het is ook mogelijk de laatste opties weg te laten met bijvoorbeeld de ```BasicStroke(float width, int cap, int join)``` constructor. De width geeft de breedte van de lijnen aan. De cap en join geven de eindes en tussenstukken van lijnstukken aan. 
+
+![Caps and Joins](les2/caps_and_joins.png)
+- JOIN_ROUND geeft een afgeronde hoek bij scherpe hoeken
+- JOIN_BEVEL knipt een hoek af bij scherpe hoeken
+- JOIN_MITER laat een scherpe punt bij scherpe hoeken
+- CAP_BUTT geeft geen extra stukken bij het uiteinde van de lijnstukken
+- CAP_SQUARE zet een extra, recht stuk aan het uiteinde van de lijnstukken met lengte van de helft van de breedte
+- CAP_ROUND rond de uiteinden van de lijnstukken af met een cirkel 
+```
+Stroke s = new BasicStroke(4.0f,
+                           BasicStroke.JOIN_ROUND, 
+                           BasicStroke.CAP_ROUND);
+```
+Deze waarden zijn integer constanten in de BasicStroke klasse, en kunnen gebruikt worden in de constructor. In het geval van de JOIN_MITER, kun je ook een extra parameter aan de constructor meegeven die de limiet van de miter-join aangeeft. Deze limiet is de diagonale afstand van de miter, dus de afstand tussen de binnenste en buitenste hoek. Standaard staat deze op 10.0f.
+
+Daarnaast is het ook mogelijk een streep-patroon mee te geven. Deze streep
 
 # Paints
 
