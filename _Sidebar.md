@@ -2,3 +2,11 @@
 - [Paths](Les2#Paths)
 - [CSG](Les2#Areas-en-Constructive-Solid-Geometry)
 - [Strokes](Les2#Strokes)
+- [Paints](Les2#Paints)
+- [Transformeren](Les2#Transformeren-van-shapes)
+- [Transformeren van het venster](Les1#Transformeren)
+- [Muisinteractie](Les2#Muisinteractie)
+- [Template](Les1#Makkelijk-gebruiken)
+- [Lijnen](Les1#Lijnen)
+- [Kleuren](Les1#Kleuren)
+- 
