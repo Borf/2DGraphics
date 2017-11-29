@@ -190,17 +190,53 @@ De color klasse implementeerd ook de Paint interface, en kun je gebruiken om een
 ## GradientPaint
 ![Gradientpaint](les2/gradientpaint.png)
 
-Een gradientpaint maak je aan met 2 punten en 2 kleuren. Java zal dan lineair interpoleren over een lijn die tussen deze 2 punten loopt. Je kunt in de constructor ook aangeven of deze gradient cyclisch of asyclisch is. Een cyclische gradient zal zichzelf blijven herhalen na de 2 punten, en een acyclische gradienet blijft dezelfde kleur na deze 2 punten
-
-## MultipleGradientPaint
+Een GradientPaint maak je aan met 2 punten en 2 kleuren. Java zal dan lineair interpoleren over een lijn die tussen deze 2 punten loopt. Je kunt in de constructor ook aangeven of deze gradient cyclisch of asyclisch is. Een cyclische gradient zal zichzelf blijven herhalen na de 2 punten, en een acyclische gradienet blijft dezelfde kleur na deze 2 punten
 
 ## LinearGradientPaint
+![LinearGradientPaint](les2/lineargradientpaint.png)
+Een [LinearGradientPaint](https://docs.oracle.com/javase/7/docs/api/java/awt/LinearGradientPaint.html) heeft 2 punten en meerdere kleuren. Daarnaast kun je aangeven hoeveel een bepaalde kleur in verhouding gebruikt moet worden. Je kunt hier dus hetzelfde mee als met eenGradientpaint, maar ook meer, door meerdere kleuren toe te voegen. De standaard constructor ```LinearGradientPaint(float startX, float startY, float endX, float endY, float[] fractions, Color[] colors)``` zal een acyclische gradientpaint maken die van het startpunt tot het eindpunt de kleuren lineair interpoleert, en daarna een constante kleur blijft. De fractions zijn hierbij een lijst met floating point waarden tussen 0 en 1, in oplopende volgorde, die aangeven waar in de gradient de kleur zich bevind. 0 is (startX,startY), 1 is (endX,endY), 0.5 is precies halverwege
 
 ## RadialGradientPaint
+![RadialGradientPaint](les2/radialgradientpaint.png)
+Een RadialGradientPaint is een gradientpaint die in een cirkel vanuit een punt van kleur verloopt. Hierbij kan nog een tweede focuspunt aangegeven worden om het middelpunt te verschuiven. Ook wordt hier een array aan kleuren meegegeven zoals bij een LinearGradientPaint. 
+```RadialGradientPaint(Point2D center, float radius, Point2D focus, float[] fractions, Color[] colors, MultipleGradientPaint.CycleMethod cycleMethod)``` is hierbij een flexibele constructor waar je een centrum, straal en focuspunt kan opgeven, en daarnaast de lijst met kleuren en fractions om de kleuren aan te geven. Daarnaast kun je een cycleMethod opgeven waarmee aangegeven wordt hoe het patroon herhaald wordt.
 
 ## TexturePaint
+Een TexturePaint maakt gebruik van een afbeelding om een shape op te vullen. Deze afbeelding is in de vorm van een BufferedImage, en wordt herhaald. In de constructor van de TexturePaint moet dus een BufferedImage meegeven worden en ook een Rectangle die aangeeft waar de afbeelding geplaatst moet worden. Om een afbeelding in te laden, kunnen we de ImageIO klasse gebruiken. Let erop dat je deze afbeelding maar 1x inlaad, dus in de constructor van je klasse, en niet bij het tekenen.
+```java
+BufferedImage texture;
+
+HelloTexturePaint()
+{
+    try {
+        texture = ImageIO.read(getClass().getResource("/images/texture.jpg"));
+    } catch (IOException | IllegalArgumentException e) {
+        e.printStackTrace();
+    }
+}
+
+
+public void paintComponent(Graphics g)
+{
+    super.paintComponent(g);
+    Graphics2D g2d = (Graphics2D)g;
+
+
+    g2d.setPaint(new TexturePaint(texture, new Rectangle2D.Double(0,0,400,400)));
+
+    g2d.fill(new Rectangle2D.Double(0,0,getWidth(), getHeight()));
+
+}
+```
 
 # Transformeren van shapes
+Naast het transformeren van het hele venster, is het ook mogelijk om ee nshape los te transformeren, en hier een nieuwe shape van te maken. Op deze manier kunnen we gemakkelijk een enkel object verplaatsen, zonder het hele canvas te verplaatsen of de shape zelf aan te passen. Dit is straks erg handig voor het laten animeren van objecten. 
+
+Om een complete transformatie voor te stellen kunnen we de AffineTransform klasse gebruiken. Een AffineTransform is een klasse die een (combinatie van) transformaties op kan slaan, en deze ook kan toepassen op vormen en punten. Intern slaat de AffineTransform een matrix op, die we kunnen manipuleren met de verschillende methoden. Voor standaard 2D transformaties wordt een 3x3 matrix gebruikt, maar omdat de onderste rij eigenlijk altijd [0, 0, 1] is, wordt deze weggelaten in de AffineTransform klasse, en slaat deze dus een 3x2 matrix op. Daarom dat je in de verschillende methoden die direct de matrix aanpassen ook maar 6 parameters ziet. Deze matrices kunnen we zelf samenstellen
+![Matrices](les2/transformmatrices.png)
+Deze matrices kun je zelf berekenen in een AffineTransform zetten door middel van de constructor. Stel dat je een shear wil doen over de X-as met een factor 2, kun je de matrix
+![matrix](https://latex.codecogs.com/gif.download?%5Cbegin%7Bbmatrix%7D%201%20%26%202%20%26%200%20%5C%5C%200%20%26%201%20%26%200%20%5C%5C%200%20%26%200%20%26%201%20%5Cend%7Bbmatrix%7D) gebruiken. De onderste rij gebruiken we niet, dus we kunnen deze in java invullen met de constructor ```new AffineTransform(1,2,0,0,1,0);```
+
 
 # Muisinteractie
 
