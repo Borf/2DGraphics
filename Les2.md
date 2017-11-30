@@ -18,7 +18,7 @@ Naast het tekenen van lijnen, kunnen we ook allerlei andere vormen tekenen. Al d
 
 Je kunt deze vormen tekenen met de ```Graphics.draw(Shape shape)``` of de ```Graphics.fill(Shape shape)``` methoden. De draw methode tekent een lijn in de vorm van de Shape die is opgegeven, en de fill methode vult de vorm op. Deze lijn of opvulling kun je een kleur geven met de ```setColor``` methode, maar kunnen we ook een beter opvulling geven. Hierover meer in de hoofdstukken over [Strokes](#Strokes) en [Paints](#Paints). 
 
-Daarnaast kun je aan shapes no een aantal vragen stellen. Zo kun je bijvoorbeeld kijken of een punt binnen de shape is met de ```contains``` methode. Deze methode kun je bijvoorbeeld gebruiken om te kijken of de gebruiker op een vorm heeft geklikt.
+Daarnaast kun je aan shapes no een aantal vragen stellen. Zo kun je bijvoorbeeld kijken of een punt binnen de shape is met de ```contains(Point2D point)``` methode. Deze methode kun je bijvoorbeeld gebruiken om te kijken of de gebruiker op een vorm heeft geklikt.
 Daarnaast kun je ook een bounding-rectangle opvragen met de ```getBounds()``` methode. Dit is de rechthoek die de volledige shape omlijnt.
 
 # Paths
@@ -298,11 +298,15 @@ class Camera
     ...
 }
 ```
+
 We kunnen nu spreken van een aantal verschillende coördinatenstelsels
 - Screen Space. Dit zijn de scherm-pixel coordinaten en lopen van 0 tot de hoogte en breedte van het scherm
-- World Space. Dit zijn de 
-- Object Space
+- World Space. Dit zijn de coordinaten in de wereld. Deze coördinaten kun je bijvoorbeeld uit een bestand inladen om een wereld op te bouwen
+- Object Space. Dit zijn de lokale coördinaten. Deze coördinaten zijn relatief ten opzichte van de oorsprong van je object
 
+![spaces](les2/spaces.png)
+
+Door nu transformaties op een slimme manier te combineren, kunnen we transformeren van object space naar screen space. We hebben dus een object in model space, dit wordt door een object-transformatie omgezet naar world space, en door de camera-transformatie omgezet naar screen space.
 
 ## Gebruiken van transformaties - Inverse
 Als een camera gebruikt wordt om het scherm te scrollen, wordt het bepalen van de wereld-coördinaten van een muisklik een stuk lastiger. Er moet rekening gehouden worden met de positie, zoom en eventueel rotatie van de camera. Om dit op te lossen kunnen we inverse van de cameratransformatie gebruiken. Als we de inverse van de cameratransformatie toepassen op de locatie van de muiscursor, krijgen we de wereld-coördinaten van dat punt. De AffineTransform klasse heeft hier de methode ```inverseTransform(Point2D source, Point2D destination)``` voor. Deze methode kun je op verschilende manieren gebruiken:
@@ -318,8 +322,57 @@ Point2D transformed2 = cameraTransform.inverseTransform(mousePosition, null);
 // manier 3, je kunt ook het punt in-place transformeren zonder nieuwe punten aan te maken
 cameraTransform.inverseTransform(mousePosition, mousePosition); 
 ```
-Door nu positie van de muis op te vragen (zie [Muisinteractie](#Muisinteractie)), gemakkelijk berekend worden welk object aangeklikt is.
+Door nu positie van de muis op te vragen (zie [Muisinteractie](#Muisinteractie)), gemakkelijk berekend worden welk object aangeklikt is, in combinatie met de transformatie van de camera
 
 # Muisinteractie
+De muis werkt in java event-driven, op basis van de MouseListener en MouseMotionListener interfaces. Deze interfaces bevatten methoden die aangeroepen worden op 't moment dat er iets gebeurt met de muis. Deze listener kan hierna met de ```addMouseListener``` en ```addMouseMotionListener()``` methoden van het JPanel toegevoegd worden. Het is ook mogelijk om meerdere mouselisteners te hebben op een paneel, maar dit is af te raden als je een enkele applicatie hebt, omdat er dan ongewenst dingen dubbel kunnen gebeuren met de muis, de communicatie tussen verschillende mouselisteners is lastig. Een voorbeeld:
+```java
+public class HelloMouse extends JPanel implements MouseListener, MouseMotionListener {
+	public static void main(String[] args)
+	{
+		JFrame frame = new JFrame("Hello Java2D");
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		frame.setMinimumSize(new Dimension(800, 600));
+		frame.setExtendedState(frame.getExtendedState() | JFrame.MAXIMIZED_BOTH);
+		frame.setContentPane(new HelloMouse());
+		frame.setVisible(true);
+	}
+
+	HelloMouse()
+	{
+		addMouseListener(this);
+		addMouseMotionListener(this);
+	}
+
+	public Point2D position = new Point2D.Double(100,100);
+
+	public void paintComponent(Graphics g)
+	{
+		super.paintComponent(g);
+		Graphics2D g2d = (Graphics2D)g;
+		g2d.setStroke(new BasicStroke(20));
+		g2d.draw(new Rectangle2D.Double(position.getX()-50, position.getY()-50, 100, 100));
+	}
+
+	public void mouseClicked(MouseEvent e) {}
+	public void mousePressed(MouseEvent e) {}
+	public void mouseReleased(MouseEvent e) {}
+	public void mouseEntered(MouseEvent e) {}
+	public void mouseExited(MouseEvent e) {}
+
+	public void mouseDragged(MouseEvent e) {
+		position = e.getPoint();
+		repaint();
+	}
+
+	public void mouseMoved(MouseEvent e) {}
+}
+```
+
+Deze code zal een paneel aanmaken met een MouseListener en MouseMotionlistener erop, en zodra gesleept wordt, wordt de positie van een rectangle aangepast. De mouseDragged methode wordt automatisch aangeroepen zodra de muis gesleept wordt (met een muisknop ingedrukt).
+
+Van het MouseEvent kunnen een aantal eigenschappen opgevraagd worden. Zo kun je met de ```getPoint()``` opvragen waar de muiscursor is, met ```getClickCount()``` hoevaak er is geklikt (dus om dubbelkliks te detecteren). Met de ```getButton()``` methode kun je opvragen welke knop is ingedrukt. Deze waarde kun je vergelijken met ```MouseEvent.BUTTON1```, ```MouseEvent.BUTTON2``` of ```MouseEvent.BUTTON3```. Dit gaat echter alleen bij de mouseClicked, mousePressed en mouseReleased methoden. Een methode die wel voor alle MouseEvents werkt, zijn de ```SwingUtilities.isLeftMouseButton(MouseEvent event)```, ```SwingUtilities.isMiddleMouseButton(MouseEvent event)``` en ```SwingUtilities.isRightMouseButton(MouseEvent event)``` methoden. Deze statische methoden in de SwingUtilities klasse houden ook rekening het slepen en andere modifiers.
+
 
 # Opgaven
+1. Maak een applicatie die het ying-yang symbool tekent. 
