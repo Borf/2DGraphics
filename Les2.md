@@ -375,4 +375,15 @@ Van het MouseEvent kunnen een aantal eigenschappen opgevraagd worden. Zo kun je 
 
 
 # Opgaven
-1. Maak een applicatie die het ying-yang symbool tekent. 
+1. Maak een programma die een maan tekent door middel van een generalpath en door middel van CSG
+
+![moon](les2/moon.png)
+
+2. Maak een applicatie die het ying-yang symbool tekent door middel van een generalpath en door middel van CSG. 
+
+![yin-yang](les2/yin-yang.png)
+
+3. Teken een programma dat 13 vierkanten naast elkaar tekent met alle kleuren die standaard in java zitten: black, blue, cyan, darkGray, gray, green, lightGray, magenta, orange, pink, red, white, yellow
+
+4. Teken een programma dat een rechthoek tekent over het gehele scherm met een RadialGradientPaint. Kies hier zelf een aantal kleuren voor uit, maar leg het centrum van de RadialPaint in het midden van het scherm (met getWidth()/2 en getHeight()/2). Voeg hierna een mousemotion listener toe, en leg het focuspunt van de RadialPaint op de locatie van de muis
+
