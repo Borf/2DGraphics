@@ -387,3 +387,4 @@ Van het MouseEvent kunnen een aantal eigenschappen opgevraagd worden. Zo kun je 
 
 4. Teken een programma dat een rechthoek tekent over het gehele scherm met een RadialGradientPaint. Kies hier zelf een aantal kleuren voor uit, maar leg het centrum van de RadialPaint in het midden van het scherm (met getWidth()/2 en getHeight()/2). Voeg hierna een mousemotion listener toe, en leg het focuspunt van de RadialPaint op de locatie van de muis
 
+5. Maak een applicatie om blokken te slepen, met een camera
