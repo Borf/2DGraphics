@@ -2,5 +2,5 @@
 - [Les 2 - Shapes, Paths, Areas, Strokes, Paints, Transformaties en interacties](Les2)
 - [Les 3 - Tekst, Images, Blending, Clipping, Animeren](Les3)
 - [Les 4 - Verlet particles](Les4)
-- [Les 5 - Physics](Les5)
-- [Les 6 - Platformer](Les6)
+- [Les 5 - Box2D Physics Engine](Les5)
+- [Les 6 - Platformer Game](Les6)
