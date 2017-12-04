@@ -1,5 +1,32 @@
 # Week 2
 
+<!-- TOC -->
+
+- [Week 2](#week-2)
+    - [Shapes](#shapes)
+    - [Paths](#paths)
+    - [Areas en Constructive Solid Geometry](#areas-en-constructive-solid-geometry)
+        - [Vereniging (add)](#vereniging-add)
+        - [Verschil (subtract)](#verschil-subtract)
+        - [Doorsnede (intersect)](#doorsnede-intersect)
+        - [Exclusieve of (xor)](#exclusieve-of-xor)
+        - [Gebruik van CSG](#gebruik-van-csg)
+    - [Strokes](#strokes)
+    - [Paints](#paints)
+        - [Color](#color)
+        - [GradientPaint](#gradientpaint)
+        - [LinearGradientPaint](#lineargradientpaint)
+        - [RadialGradientPaint](#radialgradientpaint)
+        - [TexturePaint](#texturepaint)
+    - [Transformeren van shapes](#transformeren-van-shapes)
+        - [Gebruiken van transformaties - Shape transformeren](#gebruiken-van-transformaties---shape-transformeren)
+        - [Gebruiken van transformaties - Camera](#gebruiken-van-transformaties---camera)
+        - [Gebruiken van transformaties - Inverse](#gebruiken-van-transformaties---inverse)
+    - [Muisinteractie](#muisinteractie)
+    - [Opgaven](#opgaven)
+
+<!-- /TOC -->
+
 ## Shapes
 
 Naast het tekenen van lijnen, kunnen we ook allerlei andere vormen tekenen. Al deze vormen erven over van de Shape klasse, en kunnen we met dezelfde ```draw``` methode tekenen. In de Java2D library zitten al een aantal klassen die deze shape klasse implementeren.
@@ -226,7 +253,7 @@ Een [LinearGradientPaint](https://docs.oracle.com/javase/7/docs/api/java/awt/Lin
 
 ![RadialGradientPaint](les2/radialgradientpaint.png)
 Een RadialGradientPaint is een gradientpaint die in een cirkel vanuit een punt van kleur verloopt. Hierbij kan nog een tweede focuspunt aangegeven worden om het middelpunt te verschuiven. Ook wordt hier een array aan kleuren meegegeven zoals bij een LinearGradientPaint.
-```RadialGradientPaint(Point2D center, float radius, Point2D focus, float[] fractions, Color[] colors, MultipleGradientPaint.CycleMethod cycleMethod)``` is hierbij een flexibele constructor waar je een centrum, straal en focuspunt kan opgeven, en daarnaast de lijst met kleuren en fractions om de kleuren aan te geven. Daarnaast kun je een cycleMethod opgeven waarmee aangegeven wordt hoe het patroon herhaald wordt.
+Om een RadialGradientPaint te gebruiken kun je de ```RadialGradientPaint(Point2D center, float radius, Point2D focus, float[] fractions, Color[] colors, MultipleGradientPaint.CycleMethod cycleMethod)``` constructor aanroepen, waar je een centrum, straal en focuspunt kan opgeven, en daarnaast de lijst met kleuren en fractions om de kleuren aan te geven. Daarnaast kun je een cycleMethod opgeven waarmee aangegeven wordt hoe het patroon herhaald wordt.
 
 ### TexturePaint
 
@@ -263,6 +290,7 @@ Om een complete transformatie voor te stellen kunnen we de AffineTransform klass
 ![Matrices](les2/transformmatrices.png)
 Deze matrices kun je zelf berekenen in een AffineTransform zetten door middel van de constructor. Stel dat je een shear wil doen over de X-as met een factor 2, kun je de matrix
 ![matrix](https://latex.codecogs.com/gif.download?%5Cbegin%7Bbmatrix%7D%201%20%26%202%20%26%200%20%5C%5C%200%20%26%201%20%26%200%20%5C%5C%200%20%26%200%20%26%201%20%5Cend%7Bbmatrix%7D) gebruiken. De onderste rij gebruiken we niet, dus we kunnen deze in java invullen met de constructor ```new AffineTransform(1,2,0,0,1,0);```. Om deze nu met elkaar te combineren, kunnen we de volgende code gebruiken
+
 ```java
 AffineTransform tx = new AffineTransform();
 tx.translate(10,10);
@@ -332,6 +360,7 @@ class Camera
 ```
 
 We kunnen nu spreken van een aantal verschillende coördinatenstelsels
+
 - Screen Space. Dit zijn de scherm-pixel coordinaten en lopen van 0 tot de hoogte en breedte van het scherm
 - World Space. Dit zijn de coordinaten in de wereld. Deze coördinaten kun je bijvoorbeeld uit een bestand inladen om een wereld op te bouwen
 - Object Space. Dit zijn de lokale coördinaten. Deze coördinaten zijn relatief ten opzichte van de oorsprong van je object
@@ -361,7 +390,7 @@ Door nu positie van de muis op te vragen (zie [Muisinteractie](#Muisinteractie))
 
 ## Muisinteractie
 
-De muis werkt in java event-driven, op basis van de MouseListener en MouseMotionListener interfaces. Deze interfaces bevatten methoden die aangeroepen worden op 't moment dat er iets gebeurt met de muis. Deze listener kan hierna met de ```addMouseListener``` en ```addMouseMotionListener()``` methoden van het JPanel toegevoegd worden. Het is ook mogelijk om meerdere mouselisteners te hebben op een paneel, maar dit is af te raden als je een enkele applicatie hebt, omdat er dan ongewenst dingen dubbel kunnen gebeuren met de muis, de communicatie tussen verschillende mouselisteners is lastig. Een voorbeeld:
+De muis werkt in java event-driven, op basis van de MouseListener, MouseMotionListener en MouseWheelListener interfaces. Deze interfaces bevatten methoden die aangeroepen worden op 't moment dat er iets gebeurt met de muis. Deze listener kan hierna met de ```addMouseListener()```, ```addMouseMotionListener()``` of ```addMouseWheelListener()``` methoden van het JPanel toegevoegd worden. Het is ook mogelijk om meerdere mouselisteners te hebben op een paneel, maar dit is af te raden als je een enkele applicatie hebt, omdat er dan ongewenst dingen dubbel kunnen gebeuren met de muis, de communicatie tussen verschillende mouselisteners is lastig. Een voorbeeld:
 
 ```java
 public class HelloMouse extends JPanel implements MouseListener, MouseMotionListener {
@@ -422,4 +451,8 @@ Van het MouseEvent kunnen een aantal eigenschappen opgevraagd worden. Zo kun je 
 
 3. Teken een programma dat 13 vierkanten naast elkaar tekent met alle kleuren die standaard in java zitten: black, blue, cyan, darkGray, gray, green, lightGray, magenta, orange, pink, red, white, yellow
 4. Teken een programma dat een rechthoek tekent over het gehele scherm met een RadialGradientPaint. Kies hier zelf een aantal kleuren voor uit, maar leg het centrum van de RadialPaint in het midden van het scherm (met getWidth()/2 en getHeight()/2). Voeg hierna een mousemotion listener toe, en leg het focuspunt van de RadialPaint op de locatie van de muis
-5. Maak een applicatie om blokken te slepen, met een camera
+5. Maak een applicatie om blokken te slepen, met een camera. Door met de rechtermuisknop te slepen kun je het complete scherm verslepen, met het scrollwieltje kun je de camera inzoomen en uitzoomen, en met de linker muisknop kun je een blok verslepen
+
+![Block Dragger](les2/blocks.gif)
+
+Let erop dat als je een blokje sleept, het blokje niet verspringt. Daarnaast moet het slepen natuurlijk ook werken als de camera verschoven of ingezoomed is.
