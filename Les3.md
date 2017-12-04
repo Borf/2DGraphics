@@ -97,9 +97,8 @@ Op deze manier wordt een afbeelding maar 1x ingeladen (in de constructor), en st
 
 ### SpriteSheets
 
-In games worden veel spritesheets gebruikt om animaties of meerdere gelijksoortige afbeeldingen op te slaan. Dit zijn afbeeldingen met meerdere kleine afbeeldingen erop
+![SpriteSheet](les3/spritesheet.png?right) In games worden veel spritesheets gebruikt om animaties of meerdere gelijksoortige afbeeldingen op te slaan. Dit zijn afbeeldingen met meerdere kleine afbeeldingen erop
 
-![SpriteSheet](les3/spritesheet.png)
 
 Deze afbeeldingen kun je gemakkelijk opknippen in code, doordat alle afbeeldingen even groot zijn. Dit zou je kunnen doen met de volgende code:
 
@@ -153,9 +152,7 @@ Daarnaast is bij sommige composite rules ook een floating point alpha waarde op 
 
 ## Clipping
 
-![Clipping](les3/clipping.png?right)
-
-Het is ook mogelijk om het tkeenen op bepaalde gebieden van het scherm uit te zetten, zodat er niet getekent wordt. Dit noemen we clipping. De Graphics2D klasse heeft een ```setClip(Shape shape)``` methode, die een clipping-shape instelt. Als je ```null``` meegeeft als parameter, wordt de clipping uitgezet, en anders kan er alleen binnen de vorm getekend worden die je meegeeft. Dit kun je gebruiken om bijvoorbeeld een spotlight-effect te maken, of een vorm opvullen met andere shapes.
+![Clipping](les3/clipping.png?right) Het is ook mogelijk om het tkeenen op bepaalde gebieden van het scherm uit te zetten, zodat er niet getekent wordt. Dit noemen we clipping. De Graphics2D klasse heeft een ```setClip(Shape shape)``` methode, die een clipping-shape instelt. Als je ```null``` meegeeft als parameter, wordt de clipping uitgezet, en anders kan er alleen binnen de vorm getekend worden die je meegeeft. Dit kun je gebruiken om bijvoorbeeld een spotlight-effect te maken, of een vorm opvullen met andere shapes.
 
 ## Animeren met timers
 
