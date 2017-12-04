@@ -1,7 +1,9 @@
 # Java2D
+
 Java2D is een API om binnen java met 2D graphics te werken. Deze API bestaat uit een aantal klassen in de java.awt.graphics namespace, en zijn gemakkelijk te benaderen via de [Graphics2D](https://docs.oracle.com/javase/7/docs/api/java/awt/Graphics2D.html) klasse. Deze Graphics2D klasse slaat intern een aantal attributen op die bepalen hoe getekend gaat worden, zoals welke kleur gebruikt gaat worden. Daarnaast is er een uitgebreide [Shape](https://docs.oracle.com/javase/7/docs/api/java/awt/Shape.html)-library die gebruikt kan worden om verschillende vormen te combineren. 
 
 # Makkelijk gebruiken
+
 Java2D is te gebruiken door via een [Graphics2D](https://docs.oracle.com/javase/7/docs/api/java/awt/Graphics2D.html) object. Dit object komt intern uit java, en kan gebruikt worden om op verschillende dingen te tekenen, zoals een JPanel. Om op een JPanel te tekenen kunnen we de volgende code gebruiken:
 
 ```java
@@ -201,12 +203,13 @@ y = r × sin(Ø)
 5. Spirograaf is een instrument dat gebruikt kan worden om patronen te tekenen. Het werkt door een tandwiel dat binnen een ander tandwiel draait. Voor meer informatie zie [spiroraaf](https://nl.wikipedia.org/wiki/Spirograaf)
 
     Maak een java-applicatie maken om spirograaf figuren te tekenen. Dit is eigenlijk vergelijkbaar met een parametrische vergelijking
-  
+
     Zorg dat je programma verschillende spirograaf figuren kan tekenen
 Voor inspiratie, zie ook http://nathanfriend.io/inspirograph/. Het gaat dus niet om de animatie, maar alleen om de uiteindelijke figuur. Zorg dat je applicatie bij het configureerbaar is om verschillende (of misschien zelfs willekeurige) figuren te tekenen. Maak ook gebruik van kleuren
 
     Voor het tekenen van de spirograaf kun je gebruik maken van de generieke formules
-```
+
+```math
 x = a × cos(b × ø) + c × cos(d × ø)
 y = a × sin(b × ø) + c × cos(d × ø)
 ```
