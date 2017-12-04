@@ -345,8 +345,7 @@ Let bij het gebruik van deze code dat het object waar je een shape van maakt om 
 
 ### Gebruiken van transformaties - Camera
 
-![camera](les2/scroll.gif?right)
-![camera](les2/scroll2.gif?right)<!--http://prostheticknowledge.tumblr.com/post/118534852886/scroll-back-gaming-study-by-itaykeren-looks-at-the-->
+![camera](les2/scroll.gif)![camera](les2/scroll2.gif)<!--http://prostheticknowledge.tumblr.com/post/118534852886/scroll-back-gaming-study-by-itaykeren-looks-at-the-->
 
 In veel applicaties kunnen we het viewport verplaatsen, en in of uitzoomen op een wereld. Denk hierbij bijvoorbeeld aan een applicatie waar een wereld van boven bekeken wordt, of een sidescrolling game. Dit doen we door een transformatie uit te voeren op het gehele venster. Dit kan in Java door middel van de ```Graphics2D.setTransform(AffineTransform transform)``` methode. Dit werkt op dezelfde manier als dat we in [Les 1](Les1#Transformaties) hebben gedaan, maar nu kunnen we een AffineTransform object meegeven in plaats van losse translate, rotate en scale methoden te gebruiken. We kunnen hiervoor een camera object definiëren die een AffineTransform genereerd
 
