@@ -1,9 +1,11 @@
+
 <style>
 img[src$="right"] {
   display:block;
   float: right;
 }
 </style>
+
 # Week 3
 
 <!-- TOC -->
