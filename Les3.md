@@ -97,8 +97,7 @@ Op deze manier wordt een afbeelding maar 1x ingeladen (in de constructor), en st
 
 ### SpriteSheets
 
-![SpriteSheet](les3/spritesheet.png?right) In games worden veel spritesheets gebruikt om animaties of meerdere gelijksoortige afbeeldingen op te slaan. Dit zijn afbeeldingen met meerdere kleine afbeeldingen erop
-
+![SpriteSheet](les3/spritesheet.png?right) In games worden veel spritesheets gebruikt om animaties of meerdere gelijksoortige afbeeldingen op te slaan. Dit zijn afbeeldingen met meerdere kleine afbeeldingen erop. Een voordeel is dat je dan gemakkelijk door de afbeeldingen heen kunt lopen met een nummer door ze in een array te zetten. Daarnaast is het met veel graphics APIs sneller om stukjes van afbeeldingen te laten zien dan het tekenen van verschillende afbeeldingen.
 
 Deze afbeeldingen kun je gemakkelijk opknippen in code, doordat alle afbeeldingen even groot zijn. Dit zou je kunnen doen met de volgende code:
 
@@ -115,6 +114,8 @@ public HelloImage()
     }
 }
 ```
+
+Sommige spritesheets hebben sprites die niet allemaal even groot zijn en niet op opvolgende plaasten staan. Hier zit dan altijd een extra bestand bij dat geparsed moet worden om de locatie van de sprites te vinden en uit te knippen.
 
 ## Blending
 
