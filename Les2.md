@@ -49,7 +49,7 @@ Naast het tekenen van lijnen, kunnen we ook allerlei andere vormen tekenen. Al d
 
 Je kunt deze vormen tekenen met de ```Graphics.draw(Shape shape)``` of de ```Graphics.fill(Shape shape)``` methoden. De draw methode tekent een lijn in de vorm van de Shape die is opgegeven, en de fill methode vult de vorm op. Deze lijn of opvulling kun je een kleur geven met de ```setColor``` methode, maar kunnen we ook een beter opvulling geven. Hierover meer in de hoofdstukken over [Strokes](#Strokes) en [Paints](#Paints).
 
-Daarnaast kun je aan shapes no een aantal vragen stellen. Zo kun je bijvoorbeeld kijken of een punt binnen de shape is met de ```contains(Point2D point)``` methode. Deze methode kun je bijvoorbeeld gebruiken om te kijken of de gebruiker op een vorm heeft geklikt.
+Daarnaast kun je aan shapes nog een aantal vragen stellen. Zo kun je bijvoorbeeld kijken of een punt binnen de shape is met de ```contains(Point2D point)``` methode. Deze methode kun je bijvoorbeeld gebruiken om te kijken of de gebruiker op een vorm heeft geklikt.
 Daarnaast kun je ook een bounding-rectangle opvragen met de ```getBounds()``` methode. Dit is de rechthoek die de volledige shape omlijnt.
 
 ## Paths
@@ -79,7 +79,7 @@ public void paintComponent(Graphics g)
 
 De GeneralPath klasse heeft de volgende methoden
 
-- ```moveTo(double x, double y)``` beweegt de cursor naar positie (x,y) zonder een lijn te tekenen
+- ```moveTo(double x, double y)``` Beweegt de cursor naar positie (x,y) zonder een lijn te tekenen
 - ```lineTo(double x, double y)``` Tekent een lijn van de huidige locatie naar locatie (x,y)
 - ```quadTo(double x1, double y1, double x2, double y2)``` Tekent een bezier curve naar (x1,y1) met steunpunt (x2,y2)
 - ```curveTo(double x1, double y1, double x2, double y2, double x3, double y3)``` Tekent een bezier curve naar (x1,y1) met steunpunten (x2,y2) en (x3,y3)

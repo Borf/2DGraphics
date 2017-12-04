@@ -1,11 +1,3 @@
-
-<style>
-img[src$="right"] {
-  display:block;
-  float: right;
-}
-</style>
-
 # Week 3
 
 <!-- TOC -->
@@ -105,14 +97,117 @@ Op deze manier wordt een afbeelding maar 1x ingeladen (in de constructor), en st
 
 ### SpriteSheets
 
-In games worden veel spritesheets gebruikt om animaties of meerdere gelijksoortige afbeeldingen op te slaan. Dit zijn afbeeldingen met meerdere kleine afbeeldingen erop 
+In games worden veel spritesheets gebruikt om animaties of meerdere gelijksoortige afbeeldingen op te slaan. Dit zijn afbeeldingen met meerdere kleine afbeeldingen erop
 
-![SpriteSheet](les3/spritesheet.png?right)
+![SpriteSheet](les3/spritesheet.png)
 
-Deze afbeeldingen kun je gemakkelijk opknippen
+Deze afbeeldingen kun je gemakkelijk opknippen in code, doordat alle afbeeldingen even groot zijn. Dit zou je kunnen doen met de volgende code:
+
+```java
+private BufferedImage[] tiles;
+public HelloImage()
+{
+    try {
+        BufferedImage image = ImageIO.read(getClass().getResource("/images/spritesheet.png"));
+        tiles = new BufferedImage[24];
+        //knip de afbeelding op in 24 stukjes van 32x32 pixels.
+        for(int i = 0; i < 24; i++)
+            tiles[i] = image.getSubImage(32 * (i%6), 32 * (i/6), 32, 32);
+    }
+}
+```
 
 ## Blending
 
+Standaard bij het tekenen van vormen en afbeeldingen zal java de nieuwe kleur over de oude kleur heenschrijven. Door de composite rules aan te passen kunnen we instellen hoe de nieuwe kleur over de oude kleur heenvalt. Het is ook mogelijk de 2 kleuren te combineren. In de graphics worden hierbij de termen Source en Destination gebruikt. Source is de kleur die je op dat moment aan het tekenen bent, en destination is de kleur die al op 't scherm staat. De manieren van combineren staan in de [AlphaComposite](https://docs.oracle.com/javase/7/docs/api/java/awt/AlphaComposite.html) klasse. Via de ```AlphaComposite.getInstance()``` is het mogelijk om een nieuwe AlphaComposite aan te maken met een van de standaard-regels.
+
+![composite](les3/composite.png)
+
+- CLEAR : maakt het scherm leeg op de plek waar getekent wordt
+- SRC_OVER : zet de nieuwe afbeelding over de oude afbeelding. Maakt hierbij gebruik van het alfakanaal van de nieuwe afbeelding
+- DST_OVER : zet de oorspronkelijke afbeelding over de nieuwe afbeelding. Maakt gebruik van het alfakanaal, tekent dus alleen op de plaatsen waar er nog niet getekend is
+- SRC_IN : Tekent alleen het gedeelte van de nieuwe afbeelding die op de oude afbeelding ligt
+- DST_IN : Vervangt het gedeelte van de destination dat in de source ligt
+- SRC_OUT : Het gedeelte van de source dat buiten de destination ligt vervangt de destination
+- DST_OUT : Het gedeelte van de destination dat buiten de source ligt vervangt de destination
+- SRC : Gebruikt alleen de source en blend niet met de destination
+- DST : Gebruikt alleen de destination en doet niets met de source
+- SRC_ATOP : Tekent alleen de source over de destination en houd rekening met alpha
+- DST_ATOP : Het gedeelte van de destination die over de source valt wordt getekent
+- XOR : Tekent alleen op plekken waar of de destination, of de source is, maar niet waar beide tekenen
+
+Daarnaast is bij sommige composite rules ook een floating point alpha waarde op te geven, deze geeft aan hoeveel geblend moet worden. Door SRC_OVER te nemen met een alpha van 0.5, zal de alpha-waarde van de destinationafbeelding voor iedere pixel met 0.5 vermenigvuldigd worden. Op deze manier kun je afbeeldingen en objecten in laten faden, door deze waarde te animeren van 0 naar 1
+
+```java
+    public void paintComponent(Graphics g)
+    {
+        super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D)g;
+
+        AffineTransform tx = new AffineTransform();
+
+        g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
+        g2d.fill(new Rectangle2D.Double(100,100,100,100));
+    }
+```
+
 ## Clipping
 
+![Clipping](les3/clipping.png)
+
+Het is ook mogelijk om het tkeenen op bepaalde gebieden van het scherm uit te zetten, zodat er niet getekent wordt. Dit noemen we clipping. De Graphics2D klasse heeft een ```setClip(Shape shape)``` methode, die een clipping-shape instelt. Als je ```null``` meegeeft als parameter, wordt de clipping uitgezet, en anders kan er alleen binnen de vorm getekend worden die je meegeeft. Dit kun je gebruiken om bijvoorbeeld een spotlight-effect te maken, of een vorm opvullen met andere shapes.
+
 ## Animeren met timers
+
+Animatie in computer graphics wordt gedaan door het scherm steeds opnieuw te tekenen, waarbij objecten steeds een klein beetje veranderen. Door de X-coordinaat van een object op te hogen krijg je een beweging naar rechts. We kunnen dit proces opdelen in 2, van elkaar losstaande delen code; het updaten en het tekenen. Door nu intern variabelen op te slaan met de state van de applicatie, deze aan te passen in de update, en te gebruiken in de paintComponent kunnen we nu animeren. Voor het steeds opnieuw aanroepen van code gebruiken we de ```javax.swing.Timer``` klasse. Deze kunnen we via de volgende constructie aanmaken:
+
+```java
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Rectangle2D;
+
+public class HelloAnimation extends JPanel implements ActionListener {
+    public static void main(String[] args)
+    {
+        JFrame frame = new JFrame("Hello Java2D");
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setMinimumSize(new Dimension(800, 600));
+        frame.setExtendedState(frame.getExtendedState() | JFrame.MAXIMIZED_BOTH);
+        frame.setContentPane(new HelloAnimation());
+        frame.setVisible(true);
+    }
+
+    private double angle = 0;
+
+    HelloAnimation()
+    {
+        Timer t = new Timer(1000/60, this);
+        t.start();
+    }
+
+
+    public void paintComponent(Graphics g)
+    {
+        super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D)g;
+
+        AffineTransform tx = new AffineTransform();
+        tx.translate(getWidth()/2, getHeight()/2);
+        tx.rotate(angle);
+        tx.translate(200, 0);
+
+        g2d.fill(tx.createTransformedShape(new Rectangle2D.Double(-50,-50,100,100)));
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        angle+=0.1;
+        repaint();
+    }
+}
+```
+
+In de constructor van de timer geven we aan dat de actionPerformed methode 
