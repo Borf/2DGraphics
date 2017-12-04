@@ -157,7 +157,7 @@ public void paintComponent(Graphics g)
 	}
 }
 ```
-[![probleem](les1/scaleproblem_t.png)](les1/scaleproblem.png)
+[![probleem](les1/scaleproblem_t.png)](les1/scaleproblem.png?right)
 
 Deze code schaalt het scherm met een factor 50, tekent een assenstelsel, en maakt hierna de grafiek y = sin(x), waarbij x van -10 tot 10 loopt. Bij het uitvoeren van deze code, zien we echter een probleem ontstaan, de lijnen zijn ook opgeschaald en erg dik geworden.  Dit is op 2 manieren op te lossen; door de lijndikte kleiner te maken tot 1/50, of door de schaling niet te doen met de scale methode, maar door alleen de coördinaten te vermenigvuldigen met een schalingsfactor. De tweede manier heeft in dit geval de voorkeur. Dit levert de volgende code op
 ```java
