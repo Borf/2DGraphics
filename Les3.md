@@ -9,6 +9,8 @@
     - [Blending](#blending)
     - [Clipping](#clipping)
     - [Animeren met timers](#animeren-met-timers)
+    - [Timing](#timing)
+    - [Opgaven](#opgaven)
 
 <!-- /TOC -->
 
@@ -66,6 +68,7 @@ public void paintComponent(Graphics g)
 Door nu voor iedere letter een shape te maken, kunnen nog geavanceerdere teksteffecten bereikt worden, zoals het individueel verkleuren van letters tot het tekenen van tekst in een boog
 
 ## Afbeeldingen
+
 De [Image](https://docs.oracle.com/javase/7/docs/api/java/awt/Image.html) klasse, is een abstracte klasse om met afbeeldingen te werken. Deze kun je echter niet zomaar aanmaken, omdat deze abstract is. Je kunt een afbeelding op 2 manieren aanmaken, uit een bestand inladen of een nieuwe lege afbeelding maken. Om een afbeelding in te laden vanuit een bestand en te tekenen, kunnen we de volgende code gebruiken:
 
 ```java
@@ -133,7 +136,7 @@ Standaard bij het tekenen van vormen en afbeeldingen zal java de nieuwe kleur ov
 - SRC : Gebruikt alleen de source en blend niet met de destination
 - DST : Gebruikt alleen de destination en doet niets met de source
 - SRC_ATOP : Tekent alleen de source over de destination en houd rekening met alpha
-- DST_ATOP : Het gedeelte van de destination die over de source valt wordt getekent
+- DST_ATOP : Het gedeelte van de destination die over de source valt wordt getekend
 - XOR : Tekent alleen op plekken waar of de destination, of de source is, maar niet waar beide tekenen
 
 Daarnaast is bij sommige composite rules ook een floating point alpha waarde op te geven, deze geeft aan hoeveel geblend moet worden. Door SRC_OVER te nemen met een alpha van 0.5, zal de alpha-waarde van de destinationafbeelding voor iedere pixel met 0.5 vermenigvuldigd worden. Op deze manier kun je afbeeldingen en objecten in laten faden, door deze waarde te animeren van 0 naar 1
@@ -208,4 +211,123 @@ public class HelloAnimation extends JPanel implements ActionListener {
 }
 ```
 
-In de constructor van de timer geven we aan dat de actionPerformed methode 60x per seconde wordt aangeroepen. De actionPerformed methode bevat dan de code die uitgevoerd moet worden om alle objecten te bewegen en te animeren, waarna de repaint() aangeroepen wordt. De ```repaint()``` stuurt intern in Java een verzoek om het venster opnieuw te tekenen. Java2D zal dan zelf schedulen wanneer de paintComponent aangeroepen gaat worden. Je kunt dus meerdere keren repaint() aanroepen
+In de constructor van de timer geven we aan dat de actionPerformed methode 60x per seconde wordt aangeroepen. De actionPerformed methode bevat dan de code die uitgevoerd moet worden om alle objecten te bewegen en te animeren, waarna de repaint() aangeroepen wordt. De ```repaint()``` stuurt intern in Java een verzoek om het venster opnieuw te tekenen. Java2D zal dan zelf schedulen wanneer de paintComponent aangeroepen gaat worden. Je kunt dus meerdere keren repaint() aanroepen, maar dit betekent dus niet dat er ook meerdere keren opnieuw getekent wordt. Zorg er daarom dus voor dat de actionPerformed niet te veel zware code bevat, omdat er pas opnieuw getekend wordt zodra de actionPerformed afgerond is.
+
+**Let op: de volgende code gaat dus niet werken:**
+
+```java
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Rectangle2D;
+
+public class HelloAnimation extends JPanel implements ActionListener {
+    public static void main(String[] args)
+    {
+        JFrame frame = new JFrame("Hello Java2D");
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setMinimumSize(new Dimension(800, 600));
+        frame.setExtendedState(frame.getExtendedState() | JFrame.MAXIMIZED_BOTH);
+        frame.setContentPane(new HelloAnimation());
+        frame.setVisible(true);
+    }
+
+    private double angle = 0;
+
+    HelloAnimation()
+    {
+        Timer t = new Timer(1000/60, this);
+        t.start();
+    }
+
+
+    public void paintComponent(Graphics g)
+    {
+        super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D)g;
+
+        AffineTransform tx = new AffineTransform();
+        tx.translate(getWidth()/2, getHeight()/2);
+        tx.rotate(angle);
+        tx.translate(200, 0);
+
+        g2d.fill(tx.createTransformedShape(new Rectangle2D.Double(-50,-50,100,100)));
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        while(true)
+        {
+            angle+=0.1;
+            repaint();
+        }
+    }
+}
+```
+
+## Timing
+
+De timer wordt standaard 60x per seconde aangeroepen, maar als de applicatie op een minder sterke PC uitgevoerd wordt, is het mogelijk dat de 60 beelden per seconde niet gehaald wordt. Dit kan ook gebeuren als er een zware berekening op de achtergrond gedaan wordt. Om er voor te zorgen dat alle objecten dan toch even snel blijven bewegen kunnen we gebruik maken van een tijdsmeting.
+
+Door de tijd te meten tussen de huidige update- en de vorige update-aanroep, kunnen we een factor bepalen die we met alle snelheden kunnen vermenigvuldigen. We krijgen dan de volgende code
+
+```java
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Rectangle2D;
+
+public class HelloAnimation extends JPanel implements ActionListener {
+    public static void main(String[] args)
+    {
+        JFrame frame = new JFrame("Hello Java2D");
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setMinimumSize(new Dimension(800, 600));
+        frame.setExtendedState(frame.getExtendedState() | JFrame.MAXIMIZED_BOTH);
+        frame.setContentPane(new HelloAnimation());
+        frame.setVisible(true);
+    }
+
+    private double angle = 0;
+    private long lastTime = System.currentTimeMillis();
+
+    HelloAnimation()
+    {
+        Timer t = new Timer(1000/15, this);
+        t.start();
+    }
+
+    public void paintComponent(Graphics g)
+    {
+        super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D)g;
+
+        AffineTransform tx = new AffineTransform();
+        tx.translate(getWidth()/2, getHeight()/2);
+        tx.rotate(angle);
+        tx.translate(200, 0);
+
+        g2d.fill(tx.createTransformedShape(new Rectangle2D.Double(-50,-50,100,100)));
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        long currentTime = System.currentTimeMillis();
+        double deltaTime = (currentTime - lastTime) / 1000.0;
+        lastTime = currentTime;
+        angle+=deltaTime;
+        repaint();
+    }
+}
+
+```
+
+## Opgaven
+1. Maak een applicatie die de tekst 'regenboog', in de vorm van een regenboog in regenboogkleuren tekent
+2. Doe iets met een spritesheet
+3. Maak de oude windows lijnen-screensaver
+4. Doe iets met alpha blending
