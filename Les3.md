@@ -153,7 +153,7 @@ Daarnaast is bij sommige composite rules ook een floating point alpha waarde op 
 
 ## Clipping
 
-![Clipping](les3/clipping.png)
+![Clipping](les3/clipping.png?right)
 
 Het is ook mogelijk om het tkeenen op bepaalde gebieden van het scherm uit te zetten, zodat er niet getekent wordt. Dit noemen we clipping. De Graphics2D klasse heeft een ```setClip(Shape shape)``` methode, die een clipping-shape instelt. Als je ```null``` meegeeft als parameter, wordt de clipping uitgezet, en anders kan er alleen binnen de vorm getekend worden die je meegeeft. Dit kun je gebruiken om bijvoorbeeld een spotlight-effect te maken, of een vorm opvullen met andere shapes.
 
@@ -210,4 +210,4 @@ public class HelloAnimation extends JPanel implements ActionListener {
 }
 ```
 
-In de constructor van de timer geven we aan dat de actionPerformed methode 
+In de constructor van de timer geven we aan dat de actionPerformed methode 60x per seconde wordt aangeroepen. De actionPerformed methode bevat dan de code die uitgevoerd moet worden om alle objecten te bewegen en te animeren, waarna de repaint() aangeroepen wordt. De ```repaint()``` stuurt intern in Java een verzoek om het venster opnieuw te tekenen. Java2D zal dan zelf schedulen wanneer de paintComponent aangeroepen gaat worden. Je kunt dus meerdere keren repaint() aanroepen

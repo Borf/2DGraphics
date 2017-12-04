@@ -3,3 +3,8 @@
 
 @import "{{ site.theme }}";
 .page-header { display: none; }
+
+img[src$="right"] {
+    display:block;
+    float: right;
+  }
