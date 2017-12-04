@@ -13,5 +13,7 @@ img[src$="right"] {
 img[src$="left"] {
     display:block;
     float: left;
-    margin-left: 25px;
+    margin-right: 25px;
   }
+
+h1,h2,h3 { clear: both;}
