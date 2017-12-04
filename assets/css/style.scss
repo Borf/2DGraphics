@@ -9,3 +9,9 @@ img[src$="right"] {
     float: right;
     margin-left: 25px;
   }
+
+img[src$="left"] {
+    display:block;
+    float: left;
+    margin-left: 25px;
+  }
