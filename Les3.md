@@ -1,3 +1,9 @@
+<style>
+img[src$="right"] {
+  display:block;
+  float: right;
+}
+</style>
 # Week 3
 
 <!-- TOC -->
@@ -99,7 +105,7 @@ Op deze manier wordt een afbeelding maar 1x ingeladen (in de constructor), en st
 
 In games worden veel spritesheets gebruikt om animaties of meerdere gelijksoortige afbeeldingen op te slaan. Dit zijn afbeeldingen met meerdere kleine afbeeldingen erop 
 
-![SpriteSheet](les3/spritesheet.png){.float-right}
+![SpriteSheet](les3/spritesheet.png?right)
 
 Deze afbeeldingen kun je gemakkelijk opknippen
 
