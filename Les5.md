@@ -216,6 +216,21 @@ Voor een complete demo, zie de Hello_Basketball module in week 5
 
 ## Meer over fixtures
 
+Fixures bevatten informatie over de vormen van je Bodies. Je kunt verschillende vormen gebruiken om aan het object te koppelen, en deze vormen kun je ook combineren. Deze vormen kun je aanmaken via de statische methoden in de [Geometry](http://docs.dyn4j.org/v3.2.4/org/dyn4j/geometry/Geometry.html) klasse. Een aantal van deze vormen zijn:
+
+- Circle
+- Ellipse
+- Capsule
+- Rectangle
+- Triangle
+- Polygon
+- Square
+- Rectangle
+
+Deze shapes zijn vanwege efficientie veel specifieker dan in het tekenen met Java2D. Collision met een cirkel is gemakkelijker te berekenen dan collision met een ellips. Gebruik dus altijd de simpelste vorm
+
+Daarnaast kun je in een fixture restitution
+
 ## Joints
 
 ### Distance Joint
