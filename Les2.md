@@ -281,6 +281,8 @@ public void paintComponent(Graphics g)
 }
 ```
 
+<!-- todo: hoe importeren in IntelliJ - resource folder -->
+
 ## Transformeren van shapes
 
 Naast het transformeren van het hele venster, is het ook mogelijk om ee nshape los te transformeren, en hier een nieuwe shape van te maken. Op deze manier kunnen we gemakkelijk een enkel object verplaatsen, zonder het hele canvas te verplaatsen of de shape zelf aan te passen. Dit is straks erg handig voor het laten animeren van objecten.
