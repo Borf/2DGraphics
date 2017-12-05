@@ -10,7 +10,7 @@ Om een interactieve wereld te maken met objecten die reageren zoals in de werkel
 
 ## World
 
-Alles in de physics engine speelt zich af in een wereld, een World object. Dit world object bevat alle objecten die zich in de wereld bevinden en heeft daarbij methoden om de wereld een tijdsstap vooruit te zetten. Daarnaast heeft een wereld ook een aantal eigenschappen, zoals zwaartekracht, hulpmethoden om collision te bepalen en rays te casten. 
+Alles in de physics engine speelt zich af in een wereld, een World object. Dit world object bevat alle objecten die zich in de wereld bevinden en heeft daarbij methoden om de wereld een tijdsstap vooruit te zetten. Daarnaast heeft een wereld ook een aantal eigenschappen, zoals zwaartekracht, hulpmethoden om collision te bepalen en rays te casten.
 
 ## Body
 
