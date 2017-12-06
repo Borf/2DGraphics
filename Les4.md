@@ -95,6 +95,11 @@ class Particle
         lastPosition = old;
     }
 
+    public void setPosition(Point2D position)
+    {
+        this.position = position;
+    }
+
     public void draw(Graphics2D g2d)
     {
         g2d.fill(new Ellipse2D.Double(position.getX()-5, position.getY()-5, 10, 10));
@@ -102,4 +107,41 @@ class Particle
 }
 ```
 
-Let hierbij op dat de positie eerst opgeslagen wordt voordat deze veranderd wordt, omdat deze nog in de lastPosition gezet moet worden.
+Let hierbij op dat de positie eerst opgeslagen wordt voordat deze veranderd wordt, omdat deze nog in de lastPosition gezet moet worden. Als we nu de positie aanpassen, veranderd de snelheid impliciet mee. Dit zorgt ervoor dat objecten in beweging blijven, en netjes stoppen als ze botsen. We kunnen nu simpele restricties gaan inbouwen om de particles binnen het scherm te houden
+
+```java
+
+```
+
+Er is nu te zien dat de punten binnen het scherm blijven. Door nu code toe te voegen om de punten te beïnvloeden kunnen we echter bepaalde effecten creëeren. Twee voorbeelden van dit soort invloeden zijn het vastzetten van een punt op een vaste locatie, en het op een vaste afstand te houden van twee punten. Deze twee beperkingen vatten we samen in een Constraint, waar subklassen van gemaakt kunnen worden de constraints voorstellen.
+
+```java
+abstract class Constraint
+{
+    public abstract void satisfy();
+    public abstract void draw(Graphics2D g2d); 
+}
+```
+
+Een constraint om een punt op een vast punt te houden is nu bijvoorbeeld
+
+```java
+public class StaticConstraint extends Constraint {
+    private Point2D position;
+    private Particle particle;
+
+    public StaticConstraint(Particle particle) {
+        super();
+        this.position = particle.getPosition();
+        this.particle = particle;
+    }
+
+    public void satisfy() {
+        particle.setPosition(position);
+    }
+
+    public void draw(Graphics2D g2d) {
+
+    }
+}
+```
