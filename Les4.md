@@ -1,6 +1,6 @@
 # Verlet Particles
 
-Vorige les is aan bod geweest hoe punten geanimeerd kunnen worden. Om nu een bewegend punt op te slaan, kan dit gemodelleerd worden met een locatie, snelheid en versnelling. Om dit punt een tijdstap verder te zetten, kan de volgende code gebruikt worden:
+![verlet](les4/verlet.gif?right)Vorige les is aan bod geweest hoe punten geanimeerd kunnen worden. Om nu een bewegend punt op te slaan, kan dit gemodelleerd worden met een locatie, snelheid en versnelling. Om dit punt een tijdstap verder te zetten, kan de volgende code gebruikt worden:
 
 ```java
 class Particle
