@@ -1,6 +1,8 @@
 # Verlet Particles
 
-![verlet](les4/verlet.gif?right)Vorige les is aan bod geweest hoe punten geanimeerd kunnen worden. Om nu een bewegend punt op te slaan, kan dit gemodelleerd worden met een locatie, snelheid en versnelling. Om dit punt een tijdstap verder te zetten, kan de volgende code gebruikt worden:
+![verlet](les4/verlet.gif?right)Vorige les is aan bod geweest hoe Java2D gebruikt kan worden om te animeren. geanimeerd kunnen worden. Dit kan gebruikt worden om punten op te slaan, de zogenaamde particles, om animaties en speciale effecten te maken.
+
+Om een bewegend punt op te slaan, kan dit gemodelleerd worden met een locatie, snelheid en versnelling. Om dit punt een tijdstap verder te zetten, kan de volgende code gebruikt worden:
 
 ```java
 class Particle
