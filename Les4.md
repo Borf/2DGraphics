@@ -29,6 +29,8 @@ class Particle
 }
 ```
 
+## Animeren
+
 Door nu iedere keer dat de timer tikt de update aan te roepen, zal het punt in een animatie naar beneden vallen. Door nu een lijst van particles te maken, en deze de update en draw methoden correct aan te roepen worden meerdere particles geanimeerd en op het scherm getekend
 
 ```java
@@ -68,6 +70,8 @@ class VerletDemo extends JPanel implements ActionListener
     }
 }
 ```
+
+## Verlet integratie
 
 Deze code zal een particle aanmaken, updaten en tekenen, met de mogelijkheid om er meer te tekenen. Deze voorstelling werkt goed voor simpele particles, maar het is nu erg lastig om direct het gedrag te beïnvloeden. Als een particle stilgezet wordt of verplaatst wordt vanuit de gebruikerscode, moet ook de snelheid opnieuw berekend worden, en past ook de acceleratie aan. De snelheid kan ook geïntegreerd worden, waardoor de positie en vorige positie opgeslagen wordt. De snelheid is dan gelijk aan de (huidige positie - vorige positie). De volgende code vat dit samen
 
