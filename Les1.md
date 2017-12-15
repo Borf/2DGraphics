@@ -1,3 +1,17 @@
+# Week 1
+
+<!-- TOC -->
+- [Java2D](#Java2D)
+- [Makkelijk gebruiken](#Makkelijk-gebruiken)
+- [Lijnen] (#Lijnen)
+- [Kleuren] (#Kleuren)
+- [Transformaties] (#Transformaties)
+- [Combineren van transformaties] (#Combineren-van-transformaties)
+- [Parametrische vergelijkingen] (#Parametrische-vergelijkingen)
+- [Kwaliteit] (#Kwaliteit)
+- [Opgaven] (#Opgaven)
+<!-- /TOC -->
+
 # Java2D
 
 Java2D is een verzameling van klassen om binnen java met 2D graphics te werken. Deze API bestaat uit een aantal klassen in de java.awt.graphics namespace, en veel functionaliteiten zijn gemakkelijk te benaderen via de [Graphics2D](https://docs.oracle.com/javase/7/docs/api/java/awt/Graphics2D.html) klasse. Een Graphics2D object slaat intern een aantal attributen op die bepalen hoe getekend gaat worden, zoals welke kleur gebruikt gaat worden. Daarnaast is er een uitgebreide [Shape](https://docs.oracle.com/javase/7/docs/api/java/awt/Shape.html)-library die gebruikt kan worden om verschillende vormen te combineren. Deze lessen gaan dieper in op het gebruik van Java2D, maar er is online natuurlijk [ook veel te vinden](https://docs.oracle.com/javase/tutorial/2d/TOC.html). 
