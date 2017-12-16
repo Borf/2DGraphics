@@ -99,7 +99,7 @@ De Graphics klasse slaat op met welke kleur getekend gaat worden. Deze kleur kun
   Maakt een kleur aan volgens het HSB model. Met de hue kun je een kleur instellen, de saturation is de kleurverzadiging en de brightness is de helderheid. De parameters liggen tussen 0 en 1, Color.getHSBColor(0.0f, 1.0f, 1.0f) geeft dus rood.
 - ```Color.BLACK, Color.WHITE, Color.GREEN``` 
 
-  Kleur-constanten zijn binnen java gedefinieerd als vaste basiskleuren die je gemakkelijk kunt gebruiken. De volledige lijst kun je vinden in [de java documentatie](https://docs.oracle.com/javase/7/docs/api/java/awt/Color.html#black)
+  Kleur-constanten zijn binnen java gedefinieerd als vaste basiskleuren die je gemakkelijk kunt gebruiken. De volledige lijst kun je vinden in [de java documentatie](https://docs.oracle.com/javase/7/docs/api/java/awt/Color.html#black). Let op dat de constanten altijd op twee manieren te benaderen zijn, het kan bijvoorbeeld door Color.BLACK en Color.black. Color.BLACK is later toegevoegd omdat Color.black niet aan de styleguide voldoet.
 
 Door nu een kleur aan te maken en deze in het Graphics2D object te zetten, kun je bijvoorbeeld lijnen tekenen met deze kleur. Door steeds nieuwe kleuren te maken kunnen we verschillende lijnen tekenen met verschillende kleuren:
 
