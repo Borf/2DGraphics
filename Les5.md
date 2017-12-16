@@ -1,29 +1,29 @@
 # Physics Engine
 
-![physics](les5/wreck.gif?right) Om een interactieve wereld te maken met objecten die reageren zoals in de werkelijke wereld kunnen we dit uitprogrammeren, maar er kan oko gebruik gemaakt worden van een bestaande physics engine. Een voorbeeld van een bekende 2D physics engine is [Box2D](http://www.box2d.org), gebruikt in onder andere Angry Birds. Deze engine is echter geschreven in C++, en kunnen we niet gemakkelijk binnen java gebruiken. Gelukkig zijn er ook engines beschikbaar voor java, zoals [dyn4j](http://www.dyn4j.org). Deze engine wordt nog actief ontwikkeld, en bevat dezelfde concepten als andere physics engines, zoals RigidBodies, Fixtures en Joints
+![physics](les5/wreck.gif?right) Om een interactieve wereld te maken met objecten die reageren zoals in de werkelijke wereld moeten we dit uitprogrammeren, maar er kan ook gebruik gemaakt worden van een bestaande physics engine. Een voorbeeld van een bekende 2D physics engine is [Box2D](http://www.box2d.org), gebruikt in onder andere Angry Birds. Deze engine is echter geschreven in C++ en kunnen we niet gemakkelijk binnen java gebruiken. Gelukkig zijn er ook engines beschikbaar voor java, zoals [dyn4j](http://www.dyn4j.org). Deze engine wordt nog actief ontwikkeld, en bevat dezelfde concepten als andere physics engines, zoals RigidBodies, Fixtures en Joints.
 
 ## Installatie
 
-![add library](les5/addlibrary.png?right) Om dyn4j te gebruiken, moeten we deze bij het project toevoegen. Je kunt de jarfile van [dync4j](http://www.dyn4j.org) downloaden en via verkenner in je project zetten. Door de jarfile hierna te markeren als library, kan IntelliJ deze jarfile gebruiken. Dit kun je doen door het betand te rechtsklikken, en hierna op 'mark as library' te klikken. Hierna is de jarfile als library gemarkeerd en kunnen we deze gebruiken.
+![add library](les5/addlibrary.png?right) Om dyn4j te gebruiken, moeten we deze bij het project toevoegen. Je kunt de jarfile van [dync4j](http://www.dyn4j.org) downloaden en via verkenner in je project zetten. Door de jarfile hierna te markeren als library, kan IntelliJ deze jarfile gebruiken. Dit kun je doen door het bestand te rechtsklikken, en hierna op 'mark as library' te klikken. Hierna is de jarfile als library gemarkeerd en kunnen we deze gebruiken.
 
 ![classpath](les5/classpath1.png)
 
-De library zal dan echter nog niet in het classpath van het project staan. De gemakkelijkste manier om dit toe te voegen is door een variabele te maken van het type World, en dan via de autocorrectie te kiezen om de library aan het classpath toe te voegen. Deze instellingen kun je natuurlijk ook in de module instellingen vinden, in het kopje Modules, op het tabblad 'Dependencies'
+De library zal dan echter nog niet in het classpath van het project staan. De gemakkelijkste manier om dit toe te voegen is door een variabele te maken van het type World, en dan via de autocorrectie te kiezen om de library aan het classpath toe te voegen. Deze instellingen kun je natuurlijk ook in de module instellingen vinden, in het kopje Modules, op het tabblad 'Dependencies'.
 
 ## World
 
-Alles in de physics engine speelt zich af in een wereld, een World object. Dit world object bevat alle objecten die zich in de wereld bevinden en heeft daarbij methoden om de wereld een tijdsstap vooruit te zetten. Daarnaast heeft een wereld ook een aantal eigenschappen, zoals zwaartekracht, hulpmethoden om collision te bepalen en rays te casten. Om de world aan te maken, roepen we gewoon de constructor aan
+Alles in de physics engine speelt zich af in een wereld, een World object. Dit world object bevat alle objecten die zich in de wereld bevinden en heeft daarbij methoden om de wereld een tijdstap vooruit te zetten. Daarnaast heeft een wereld ook een aantal eigenschappen, zoals zwaartekracht en hulpmethoden om collision te bepalen en rays te casten. Om de world aan te maken, roepen we gewoon de constructor aan:
 
 ```java
     world = new World();
     world.setGravity(new Vector2(0,-9.8));
 ```
 
-Deze wereld maakt gebruik van standaard eenheden, dus meters, kilogram en seconden (MKS). Om dit straks op het scherm af te beelden zal er dus een transformatie moeten gebruiken om van meters naar pixels te gaan. Deze transformatie is meestal een simpele schaling met een factor, en eventueel een translatie om de cameraview op de wereld te veranderen
+Deze wereld maakt gebruik van standaard eenheden, dus meters, kilogram en seconden (MKS). Om dit straks op het scherm af te beelden zal er dus een transformatie moeten gebruiken om van meters naar pixels te gaan. Deze transformatie is meestal een simpele schaling met een factor, en eventueel een translatie om de cameraview op de wereld te veranderen.
 
 ## Body
 
-De basis voor alle objecten in de physics world is de Body klasse. Dit is een klasse voor een RigidBody, een object dat niet te vervormen is. Een Body heeft eigenschappen die het gedrag van een object bepalen, het gewicht, de positie, snelheid, rotatie en draaisnelheid. Daarnaast kunnen we het object beïnvloeden door er krachten op uit te oefenen, om deze te verplaatsen of te draaien
+De basis voor alle objecten in de physics world is de Body klasse. Dit is een klasse voor een RigidBody, een object dat niet te vervormen is. Een Body heeft eigenschappen die het gedrag van een object bepalen, het gewicht, de positie, snelheid, rotatie en draaisnelheid. Daarnaast kunnen we het object beïnvloeden door er krachten op uit te oefenen, om deze te verplaatsen of te draaien.
 
 ## Fixture en Convex Shapes
 
@@ -39,7 +39,7 @@ ball.setMass(MassType.NORMAL);
 world.addBody(ball);
 ```
 
-Door de body nu met fixture aan de world toe te voegen, kunnen we deze body simuleren. Dit doen we met de update methode. Deze methode wil weten hoeveel tijd er is verstreken sinds de vorige update aanroep, en zal op basis van deze tijd alle objecten verplaatsen en draaien. Om de bal te simuleren, kunnen we de volgende code gebruiken om de positie over een seconde te bekijken
+Door de body nu met een fixture aan de world toe te voegen, kunnen we deze body simuleren. Dit doen we met de update methode. Deze methode wil weten hoeveel tijd er is verstreken sinds de vorige update aanroep, en zal op basis van deze tijd alle objecten verplaatsen en draaien. Om de bal te simuleren, kunnen we de volgende code gebruiken om de positie over een seconde te bekijken:
 
 ```java
 for(int i = 0; i < 10; i++)
@@ -117,13 +117,13 @@ public class DebugDraw {
 }
 ```
 
-Om deze debugdraw nu te gebruiken moeten we een Graphics2D object meegeven, de world die we willen tekenen en een schaal: ```DebugDraw.draw(g2d, world, 100.0);```. Deze schaal is nodi omdat als we de schaal in de Graphics2D.setTransform() meegeven, de lijnen erg dik worden.
+Om deze debugdraw nu te gebruiken moeten we een Graphics2D object meegeven, de world die we willen tekenen en een schaal: ```DebugDraw.draw(g2d, world, 100.0);```. Deze schaal is nodig omdat als we de schaal in de Graphics2D.setTransform() meegeven, de lijnen erg dik worden.
 
 ## Plaatjes en echt gebruik
 
 In de meeste games wordt gebruik gemaakt van sprites voor de verschillende objecten. We kunnen bijvoorbeeld een basketbalgame maken, waarbij we een afbeelding van een bal gebruiken, zodat er meer detail in zit dan een simpele shape. In de tekencode halen we dan de positie en rotatie van de bal-Body op, en gebruiken deze om een afbeelding op de juiste plaats te zetten.
 
-Daarnaast kunnen we ook gebruik maken van de timer om de wereld automatisch te updaten. In de timer nemen we de code voor de [dynamische tijdstap](Les3#timing) om de tijdstappen te berekenen voor de update methode. Daarnaast slaan we de objecten die we willen tekenen in een nieuw wrapper-object op. Dit object bevat een Body en een afbeelding. Daarnaast hebben we ook 2 attributen offset en scale om de afbeelding netjes over de Body te laten vallen
+Daarnaast kunnen we ook gebruik maken van de timer om de wereld automatisch te updaten. In de timer nemen we de code voor de [dynamische tijdstap](Les3#timing) over om de tijdstappen te berekenen voor de update methode. Daarnaast slaan we de objecten die we willen tekenen in een nieuw wrapper-object op. Dit object bevat een Body en een afbeelding. Daarnaast hebben we ook twee attributen: offset en scale om de afbeelding netjes over de Body te laten vallen.
 
 ```java
 import org.dyn4j.dynamics.Body;
@@ -184,7 +184,7 @@ world.addBody(ball);
 gameObjects.add(new GameObject("/images/basketball.png", ball, new Vector2(0,0), 0.05));
 ```
 
-de update wordt dan
+de update wordt dan:
 
 ```java
 private long lastTime;
@@ -199,7 +199,7 @@ public void actionPerformed(ActionEvent e) {
 }
 ```
 
-en de paintComponent
+en de paintComponent:
 
 ```java
 public void paintComponent(Graphics g)
@@ -216,7 +216,7 @@ Voor een complete demo, zie de Hello_Basketball module in week 5
 
 ## Meer over fixtures
 
-Fixures bevatten informatie over de vormen van je Bodies. Je kunt verschillende vormen gebruiken om aan het object te koppelen, en deze vormen kun je ook combineren. Deze vormen kun je aanmaken via de statische methoden in de [Geometry](http://docs.dyn4j.org/v3.2.4/org/dyn4j/geometry/Geometry.html) klasse. Een aantal van deze vormen zijn:
+Fixtures bevatten informatie over de vormen van je Bodies. Je kunt verschillende vormen gebruiken om aan het object te koppelen, en deze vormen kun je ook combineren. Deze vormen kun je aanmaken via de statische methoden in de [Geometry](http://docs.dyn4j.org/v3.2.4/org/dyn4j/geometry/Geometry.html) klasse. Een aantal van deze vormen zijn:
 
 - Circle
 - Ellipse
@@ -227,7 +227,7 @@ Fixures bevatten informatie over de vormen van je Bodies. Je kunt verschillende 
 - Square
 - Rectangle
 
-Deze shapes zijn vanwege efficientie veel specifieker dan in het tekenen met Java2D. Collision met een cirkel is gemakkelijker te berekenen dan collision met een ellips. Gebruik dus altijd de simpelste vorm
+Deze shapes zijn vanwege efficientie veel specifieker dan in het tekenen met Java2D. Collision met een cirkel is gemakkelijker te berekenen dan collision met een ellipse. Gebruik dus altijd de simpelste vorm.
 
 Daarnaast kun je in een fixture restitution
 
