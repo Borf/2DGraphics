@@ -4,6 +4,8 @@ Java2D is een verzameling van klassen om binnen java met 2D graphics te werken. 
 
 Er wordt gebruik gemaakt van Java2D in combinatie met Swing, maar de concepten die behandeld worden zijn ook gemakkelijk toe te passen binnen JavaFX. Daarnaast zijn deze concepten ook toepasbaar binnen andere omgevingen, zoals de SurfaceView binnen android, of het canvas binnen C#.net
 
+Alle code voor deze week kun je vinden op [github](https://github.com/Borf/2DGraphics_demo/tree/master/Java2D_week1), in het Java2D_week1 project.
+
 ## Makkelijk gebruiken
 
 Java2D is te gebruiken door via een [Graphics2D](https://docs.oracle.com/javase/7/docs/api/java/awt/Graphics2D.html) object. Dit object komt intern uit java en Swing, en kan gebruikt worden om op verschillende dingen te tekenen, zoals een JPanel. Om op een JPanel te tekenen kunnen we de volgende code gebruiken:
@@ -31,7 +33,6 @@ public class Java2DDemo extends JPanel
         Graphics2D g2d = (Graphics2D)g;
 //teken
     }
-
 }
 ```
 
@@ -41,18 +42,18 @@ public class Java2DDemo extends JPanel
 
 ![line](les1/line.png)
 
-Java2D werkt met een [Carthesisch Coördinatenstelsel](https://nl.wikipedia.org/wiki/Cartesisch_coördinatenstelsel). In het kort betekent dit dat er gebruik wordt gemaakt van een X- en een Y-as. De oorsprong van het coördinatenstelsel ligt standaard linksboven in het venster, waarbij de Y-as naar beneden loopt. Dit is dus gespiegeld ten opzichte van het wiskundige assenstelsel dat normaal gebruikt wordt om bijvoorbeeld grafieken te tekenen. Standaard, is de eenheid een pixel. Dit betekent dus dat punt (200,100) 200 pixels naar rechts, en 100 pixels naar beneden ten opzichte van de linkerbovenhoek ligt.
+Java2D werkt met een [Carthesisch Coördinatenstelsel](https://nl.wikipedia.org/wiki/Cartesisch_coördinatenstelsel). In het kort betekent dit dat er gebruik wordt gemaakt van een X- en een Y-as. De oorsprong van het coördinatenstelsel ligt standaard linksboven in het paneel, waarbij de Y-as naar beneden loopt. Dit is dus gespiegeld ten opzichte van het wiskundige assenstelsel dat normaal gebruikt wordt om bijvoorbeeld grafieken te tekenen. Standaard, is de eenheid een pixel. Dit betekent dus dat punt (200,100) 200 pixels naar rechts, en 100 pixels naar beneden ten opzichte van de linkerbovenhoek ligt. Dit is een standaard die in veel grafische APIs gebruikt wordt.
 
 Om een lijn te tekenen kan de ```draw()``` methode in het Graphics2D object gebruikt worden. Deze methode wil een Shape als parameter, en een [Line2D](https://docs.oracle.com/javase/7/docs/api/java/awt/geom/Line2D.html) is een voorbeeld van een Shape. De Line2D klasse heeft geen public constructor, en we zullen gebruik moeten maken van een van de subklassen van Line2D, zoals [Line2D.Double](https://docs.oracle.com/javase/7/docs/api/java/awt/geom/Line2D.Double.html). Deze kunnen we direct aan de draw methode meegeven, voor de volgende code
 
 ```java
-public class Line2DDemo extends JPanel
+public class HelloLine extends JPanel
 {
     public static void main(String[] args)
     {
         JFrame frame = new JFrame("Java2D");
         frame.setSize(800, 600);
-        frame.setContentPane(new Java2DDemo());
+        frame.setContentPane(new HelloLine());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
@@ -67,12 +68,13 @@ public class Line2DDemo extends JPanel
         Graphics2D g2d = (Graphics2D)g;
         g2d.draw(new Line2D.Double(200, 100,    500, 200));
     }
-
 }
 ```
+
 Deze code zal een lijn tekenen van de coördinaat (200,100) naar (500,200)
 
 ## Kleuren
+
 De Graphics klasse slaat op met welke kleur getekend gaat worden. Deze kleur kun je veranderen, en alle opvolgende teken-commandos zullen met deze kleur getekend worden. De kleur kun je aanpassen met de setColor(Color color) methode. Kleuren kunnen op verschillende manieren aangemaakt worden, via de [Color](https://docs.oracle.com/javase/7/docs/api/java/awt/Color.html) klasse:
 - ```new Color(float r, float g, float b)```
   
@@ -121,12 +123,14 @@ Deze code zal dus 500 lijnen tekenen, met ieder een andere kleur op basis van he
 ## Transformaties
 
 Het standaard coördinatenstelsel in java2D heeft de oorsprong in de linkerbovenhoek van het scherm zitten, waarbij de Y-as naar beneden gaat. Soms is dit echter onhandig met het tekenen, en is het bijvoorbeeld handiger om dit assenstelsel aan te kunnen passen. Dit kan in de computer graphics met 3 verschillende acties
+
 - **Transleren**
 
   Transleren ofwel verplaatsen, verplaatst de oorsprong van het coördinatenstelsel. Dit kun je dus bijvoorbeeld gebruiken om de oorsprong op het centrum van het venster te leggen. We kunnen dit doen met de ```translate(double x, double y)``` methode in het Graphics2D object. Door ```g2d.translate(100,100);``` uit te voeren, verplaatsen we de oorsprong naar de pixel-coördinaat (100,100) in het venster. Met ```g2d.translate(getWidth()/2, getHeight()/2);``` kunnen we de hoogte en breedte van het paneel opvragen, en komt de oorsprong in het midden van het venster te liggen.
+
 - **Roteren**
 
-  Rotatie draait het coördinatenstelsel rond de oorsprong, of een ander punt. Dit doen we met de ```rotate(double hoek)``` methode (deze draait om de oorsprong) of de ```rotate(double hoek, double x, double y)``` methode (deze draait om een punt). Het is voor deze methoden dus erg belangrijk waar de oorsprong van het coördinatenstelsel ligt. 
+  Rotatie draait het coördinatenstelsel rond de oorsprong, of een ander punt. Dit doen we met de ```rotate(double hoek)``` methode (deze draait om de oorsprong) of de ```rotate(double hoek, double x, double y)``` methode (deze draait om een punt). Het is voor deze methoden dus erg belangrijk waar de oorsprong van het coördinatenstelsel ligt.
 - **Schalen**
 
   Schalen vergroot of verkleint het coordinatenstelsel vanuit de oorsprong. Dit doen we met de [```scale(double x, double y)```](https://docs.oracle.com/javase/7/docs/api/java/awt/Graphics2D.html#scale(double,%20double)) methode. De x en y parameters zijn hierbij vermenigvuldigings-schaalfactoren. Een factor 1 zal de coördinaten hetzelfde houden, 2 maakt de wereld 2× zo groot. Een schalingsfactor van 0 zal deze as compleet 'uitzetten', en een factor van -1 zal de as spiegelen. 
@@ -134,7 +138,8 @@ Het standaard coördinatenstelsel in java2D heeft de oorsprong in de linkerboven
 ## Combineren van transformaties
 
 Door verschillende transformaties achter elkaar uit te voeren kunnen we deze transformaties combineren. Hierbij is de volgorde van groot belang. Het is bijvoorbeeld belangrijk om eerst de oorsprong goed te zetten, voordat om de oorsprong gedraaid wordt. Door de wiskunde achter het combineren van deze transformaties (Zie volgende week), staan deze transformaties in de omgedraaide volgorde. Je moet de regels code dus van onder lezen. Om bijvoorbeeld de oorsprong van het coördinatenstelsel in het midden van het venster te zetten, en hierna de Y-as om te draaien zodat Y positief omhoog gaat, kunnen we de volgende code gebruiken
-```
+
+```java
 g2d.translate(getWidth()/2, getHeight()/2);
 g2d.scale(1,-1);
 ```
@@ -225,6 +230,7 @@ public void paintComponent(Graphics g)
 ```
 
 ## Opgaven
+
 We gaan deze periode met IntelliJ werken. Maak voor iedere week een project met submodulen voor iedere opgave. Hiernaast is het gemakkelijk een template-project te gebruiken. De code voor een template vind je in het hoofdstuk [Makkelijk Gebruiken](#makkelijk-gebruiken)
 
 1. Schrijf een programma dat een huis tekent. Het huis bestaat uit een basis met een puntdak, en een deur. Dit is een lijntekening en is dus een simpele vorm, zoals ![huis](les1/house.png)
@@ -233,7 +239,7 @@ We gaan deze periode met IntelliJ werken. Maak voor iedere week een project met 
 
 3. Schrijf een programma dat een spiraal tekent. Voor een spiraal kun je de formules gebruiken in het [poolcoördinaten-stelsel](https://nl.wikipedia.org/wiki/Poolcoördinaten). Door de formule `Ø = n × R` te gebruiken, krijg je een spiraalfiguur. hierin is n een constante de afstand tussen de spiraal aan te passen. Je kunt hier bijvoorbeeld 1 voor nemen. Om hierna van poolcoördinaten naar carthesische te gaan kun je de sinus en cosinus gebruiken:
 
-```
+```math
 x = r × cos(Ø)
 y = r × sin(Ø)
 ```
