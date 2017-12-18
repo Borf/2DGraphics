@@ -16,9 +16,9 @@
 
 ## Tekst
 
-We kunnen tekst op 't scherm zetten met de [```drawString(String text, float x, float y)```](https://docs.oracle.com/javase/7/docs/api/java/awt/Graphics2D.html#drawString(java.lang.String,%20float,%20float)) methode. Deze methode zal een tekst tekenen op de aangegeven positie, met de transformatie die op dat moment in het Graphics2D object staat opgeslagen. Daarnaast kunnen we een lettertype instellen met de [```setFont(Font font)```](https://docs.oracle.com/javase/7/docs/api/java/awt/Graphics.html#setFont(java.awt.Font)) methode. In dit font object staan de eigenschappen van het lettertype opgeslagen, zoals welk lettertype dit is, de afmetingen, de styling (_bold_, *italic*).
+We kunnen tekst op 't scherm zetten met de [```drawString(String text, float x, float y)```](https://docs.oracle.com/javase/7/docs/api/java/awt/Graphics2D.html#drawString(java.lang.String,%20float,%20float)) methode. Deze methode zal een tekst tekenen op de aangegeven positie, met de transformatie die op dat moment in het Graphics2D object staat opgeslagen. Daarnaast kunnen we een lettertype instellen met de [```setFont(Font font)```](https://docs.oracle.com/javase/7/docs/api/java/awt/Graphics.html#setFont(java.awt.Font)) methode. In dit font object staan de eigenschappen van het lettertype opgeslagen, zoals welk lettertype dit is, de afmetingen en de styling (_bold_, *italic*).
 
-Omdat de geïnstalleerde lettertypen op iedere computer anders zijn, heeft java een aantal standaard lettertypen gedefinieerd.
+Omdat de geïnstalleerde lettertypen op iedere computer anders zijn, heeft java een aantal standaard lettertypen gedefinieerd:
 
 - Serif
 - SansSerif
@@ -34,7 +34,7 @@ De standaard lettertypen die gebruikt worden zijn Proportional. Dit betekent dat
 
 Serifs (Nederlands: [Schreef](https://nl.wikipedia.org/wiki/Schreef)), zijn de uitstekende stukjes in een lettertype. Door gebruik te maken van een serif, krijgt een lettertype meer variatie, waardoor het gemakkelijker te herkennen is. Lettertypen met serif worden vooral gebruikt bij gedrukte tekst. Op een beeldscherm wordt meestal gebruik gemaakt van lettertypen zonder serif, omdat er bij de omzetting naar pixels maar een beperkt aantal pixels beschikbaar zijn, wat er voor zorgt dat de serif vaak erg klein zijn en afleiden van de rest van de letter.
 
-Om een font te maken kan gebruik worden gemaakt van de [```Font(String name, int style, int size)```](https://docs.oracle.com/javase/7/docs/api/java/awt/Font.html#Font(java.lang.String,%20int,%20int)) constructor. De naam kan de naam van een lettertype op de PC zijn, maar kan ook een van de standaard java-lettertypen zijn (Serif, SansSerif, Monospaced, Dialog, Dialoginput). Deze namen staan ook opgeslagen in de Font-klasse, als Font.DIALOG, Font.MONOSPACED etc. De style geeft de stijl van het lettertype aan:
+Om een font te maken kan gebruik worden gemaakt van de [```Font(String name, int style, int size)```](https://docs.oracle.com/javase/7/docs/api/java/awt/Font.html#Font(java.lang.String,%20int,%20int)) constructor. De naam kan de naam van een lettertype op de PC zijn, maar kan ook een van de standaard java-lettertypen zijn (Serif, SansSerif, Monospaced, Dialog, Dialoginput). Deze namen staan ook opgeslagen in de Font-klasse, als Font.DIALOG en Font.MONOSPACED etc. De style geeft de stijl van het lettertype aan:
 
 - Font.PLAIN
 - Font.BOLD
@@ -49,7 +49,7 @@ Font font = Font.createFont(Font.TRUETYPE_FONT, new File("A.ttf"));
 
 Ook is het mogelijk om een lettertype af te leiden van een bestaand, ingeladen lettertype. Dit doe je met de [```Font.deriveFont()```](https://docs.oracle.com/javase/7/docs/api/java/awt/Font.html#deriveFont(float)) methoden. Met de verschillende deriveFont methoden kunnen de afmetingen, stijl of zelfs een complete transformatie op een font veranderd worden.
 
-Om nu meer te kunnen doen met fonts, kunnen we deze ook omzetten naar een Shape, zodat we deze kunnen gebruiken met de fill en draw methoden. Iedere tekst zal dan dus wel een eigen Shape-object krijgen, dus dit is niet erg handig in gebruik van dynamische teksten. Met de volgende code kunnen we bijvoorbeeld een outline tekenen
+Om nu meer te kunnen doen met fonts, kunnen we deze ook omzetten naar een Shape, zodat we deze kunnen gebruiken met de fill en draw methoden. Iedere tekst zal dan dus wel een eigen Shape-object krijgen, dus dit is niet erg handig in gebruik van dynamische teksten. Met de volgende code kunnen we bijvoorbeeld een outline tekenen:
 
 ```java
 public void paintComponent(Graphics g)
@@ -57,7 +57,7 @@ public void paintComponent(Graphics g)
     super.paintComponent(g);
     Graphics2D g2d = (Graphics2D)g;
 
-    Font f = new Font("Arial", Font.PLAIN, 30);
+    Font font = new Font("Arial", Font.PLAIN, 30);
     Shape shape = font.createGlyphVector(g2d.getFontRenderContext(), "Hello World");
     g2d.draw(shape);
     g2d.draw(AffineTransform.getTranslateInstance(100,100).createTransformedShape(shape));
@@ -79,7 +79,9 @@ class HelloImage extends JPanel
     {
         try {
             image = ImageIO.read(getClass().getResource("/images/test.png"));
-        }
+        } catch (Exception e) {
+			e.printStackTrace();
+		}
     }
 
     public void paintComponent(Graphics g)
@@ -114,7 +116,10 @@ public HelloImage()
         //knip de afbeelding op in 24 stukjes van 32x32 pixels.
         for(int i = 0; i < 24; i++)
             tiles[i] = image.getSubImage(32 * (i%6), 32 * (i/6), 32, 32);
-    }
+    } catch (Exception e) {
+		e.printStackTrace();
+	}
+
 }
 ```
 
@@ -122,24 +127,24 @@ Sommige spritesheets hebben sprites die niet allemaal even groot zijn en niet op
 
 ## Blending
 
-Standaard bij het tekenen van vormen en afbeeldingen zal java de nieuwe kleur over de oude kleur heenschrijven. Door de composite rules aan te passen kunnen we instellen hoe de nieuwe kleur over de oude kleur heenvalt. Het is ook mogelijk de 2 kleuren te combineren. In de graphics worden hierbij de termen Source en Destination gebruikt. Source is de kleur die je op dat moment aan het tekenen bent, en destination is de kleur die al op 't scherm staat. De manieren van combineren staan in de [AlphaComposite](https://docs.oracle.com/javase/7/docs/api/java/awt/AlphaComposite.html) klasse. Via de ```AlphaComposite.getInstance()``` is het mogelijk om een nieuwe AlphaComposite aan te maken met een van de standaard-regels.
+Standaard bij het tekenen van vormen en afbeeldingen zal java de nieuwe kleur over de oude kleur heenschrijven. Door de composite rules aan te passen kunnen we instellen hoe de nieuwe kleur over de oude kleur heenvalt. Het is ook mogelijk de twee kleuren te combineren. In de graphics wereld worden hierbij de termen Source en Destination gebruikt. Source is de kleur die je op dat moment aan het tekenen bent en destination is de kleur die al op 't scherm staat. De manieren van combineren staan in de [AlphaComposite](https://docs.oracle.com/javase/7/docs/api/java/awt/AlphaComposite.html) klasse. Via de ```AlphaComposite.getInstance()``` is het mogelijk om een nieuwe AlphaComposite aan te maken met een van de standaard-regels.
 
 ![composite](les3/composite.png)
 
-- CLEAR : maakt het scherm leeg op de plek waar getekent wordt
-- SRC_OVER : zet de nieuwe afbeelding over de oude afbeelding. Maakt hierbij gebruik van het alfakanaal van de nieuwe afbeelding
-- DST_OVER : zet de oorspronkelijke afbeelding over de nieuwe afbeelding. Maakt gebruik van het alfakanaal, tekent dus alleen op de plaatsen waar er nog niet getekend is
-- SRC_IN : Tekent alleen het gedeelte van de nieuwe afbeelding die op de oude afbeelding ligt
-- DST_IN : Vervangt het gedeelte van de destination dat in de source ligt
-- SRC_OUT : Het gedeelte van de source dat buiten de destination ligt vervangt de destination
-- DST_OUT : Het gedeelte van de destination dat buiten de source ligt vervangt de destination
-- SRC : Gebruikt alleen de source en blend niet met de destination
-- DST : Gebruikt alleen de destination en doet niets met de source
-- SRC_ATOP : Tekent alleen de source over de destination en houd rekening met alpha
-- DST_ATOP : Het gedeelte van de destination die over de source valt wordt getekend
-- XOR : Tekent alleen op plekken waar of de destination, of de source is, maar niet waar beide tekenen
+- CLEAR : maakt het scherm leeg op de plek waar getekent wordt.
+- SRC_OVER : zet de nieuwe afbeelding over de oude afbeelding. Maakt hierbij gebruik van het alfakanaal van de nieuwe afbeelding.
+- DST_OVER : zet de oorspronkelijke afbeelding over de nieuwe afbeelding. Maakt gebruik van het alfakanaal, tekent dus alleen op de plaatsen waar er nog niet getekend is.
+- SRC_IN : Tekent alleen het gedeelte van de nieuwe afbeelding die op de oude afbeelding ligt.
+- DST_IN : Vervangt het gedeelte van de destination dat in de source ligt.
+- SRC_OUT : Het gedeelte van de source dat buiten de destination ligt vervangt de destination.
+- DST_OUT : Het gedeelte van de destination dat buiten de source ligt vervangt de destination.
+- SRC : Gebruikt alleen de source en blend niet met de destination.
+- DST : Gebruikt alleen de destination en doet niets met de source.
+- SRC_ATOP : Tekent alleen de source over de destination en houd rekening met alpha.
+- DST_ATOP : Het gedeelte van de destination die over de source valt wordt getekend.
+- XOR : Tekent alleen op plekken waar of de destination, of de source is, maar niet waar beide tekenen.
 
-Daarnaast is bij sommige composite rules ook een floating point alpha waarde op te geven, deze geeft aan hoeveel geblend moet worden. Door SRC_OVER te nemen met een alpha van 0.5, zal de alpha-waarde van de destinationafbeelding voor iedere pixel met 0.5 vermenigvuldigd worden. Op deze manier kun je afbeeldingen en objecten in laten faden, door deze waarde te animeren van 0 naar 1
+Daarnaast is bij sommige composite rules ook een floating point alpha waarde op te geven, deze geeft aan hoeveel geblend moet worden. Door SRC_OVER te nemen met een alpha van 0.5, zal de alpha-waarde van de destinationafbeelding voor iedere pixel met 0.5 vermenigvuldigd worden. Op deze manier kun je afbeeldingen en objecten in laten faden, door deze waarde te animeren van 0 naar 1.
 
 ```java
     public void paintComponent(Graphics g)
@@ -156,11 +161,11 @@ Daarnaast is bij sommige composite rules ook een floating point alpha waarde op 
 
 ## Clipping
 
-![Clipping](les3/clipping.png?right) Het is ook mogelijk om het tkeenen op bepaalde gebieden van het scherm uit te zetten, zodat er niet getekent wordt. Dit noemen we clipping. De Graphics2D klasse heeft een ```setClip(Shape shape)``` methode, die een clipping-shape instelt. Als je ```null``` meegeeft als parameter, wordt de clipping uitgezet, en anders kan er alleen binnen de vorm getekend worden die je meegeeft. Dit kun je gebruiken om bijvoorbeeld een spotlight-effect te maken, of een vorm opvullen met andere shapes.
+![Clipping](les3/clipping.png?right) Het is ook mogelijk om het tekenen op bepaalde gebieden van het scherm uit te zetten, zodat er niet getekent wordt. Dit noemen we clipping. De Graphics2D klasse heeft een ```setClip(Shape shape)``` methode, die een clipping-shape instelt. Als je ```null``` meegeeft als parameter, wordt de clipping uitgezet, en anders kan er alleen binnen de vorm getekend worden die je meegeeft. Dit kun je gebruiken om bijvoorbeeld een spotlight-effect te maken, of een vorm opvullen met andere shapes.
 
 ## Animeren met timers
 
-Animatie in computer graphics wordt gedaan door het scherm steeds opnieuw te tekenen, waarbij objecten steeds een klein beetje veranderen. Door de X-coordinaat van een object op te hogen krijg je een beweging naar rechts. We kunnen dit proces opdelen in 2, van elkaar losstaande delen code; het updaten en het tekenen. Door nu intern variabelen op te slaan met de state van de applicatie, deze aan te passen in de update, en te gebruiken in de paintComponent kunnen we nu animeren. Voor het steeds opnieuw aanroepen van code gebruiken we de ```javax.swing.Timer``` klasse. Deze kunnen we via de volgende constructie aanmaken:
+Animatie in computer graphics wordt gedaan door het scherm steeds opnieuw te tekenen, waarbij objecten steeds een klein beetje veranderen. Door de X-coordinaat van een object op te hogen krijg je een beweging naar rechts. We kunnen dit proces opdelen in twee, van elkaar losstaande delen code; het updaten en het tekenen. Door nu intern variabelen op te slaan met de state van de applicatie, deze aan te passen in de update, en te gebruiken in de paintComponent kunnen we nu animeren. Voor het steeds opnieuw aanroepen van code gebruiken we de ```javax.swing.Timer``` klasse. Deze kunnen we via de volgende constructie aanmaken:
 
 ```java
 import javax.swing.*;
@@ -183,7 +188,7 @@ public class HelloAnimation extends JPanel implements ActionListener {
 
     private double angle = 0;
 
-    HelloAnimation()
+    public HelloAnimation()
     {
         Timer t = new Timer(1000/60, this);
         t.start();
@@ -211,7 +216,7 @@ public class HelloAnimation extends JPanel implements ActionListener {
 }
 ```
 
-In de constructor van de timer geven we aan dat de actionPerformed methode 60x per seconde wordt aangeroepen. De actionPerformed methode bevat dan de code die uitgevoerd moet worden om alle objecten te bewegen en te animeren, waarna de repaint() aangeroepen wordt. De ```repaint()``` stuurt intern in Java een verzoek om het venster opnieuw te tekenen. Java2D zal dan zelf schedulen wanneer de paintComponent aangeroepen gaat worden. Je kunt dus meerdere keren repaint() aanroepen, maar dit betekent dus niet dat er ook meerdere keren opnieuw getekent wordt. Zorg er daarom dus voor dat de actionPerformed niet te veel zware code bevat, omdat er pas opnieuw getekend wordt zodra de actionPerformed afgerond is.
+In de constructor van de timer geven we aan dat de actionPerformed methode 60x per seconde wordt aangeroepen. De actionPerformed methode bevat dan de code die uitgevoerd moet worden om alle objecten te bewegen en te animeren, waarna de repaint() aangeroepen wordt. De ```repaint()``` stuurt intern in Java een verzoek om het venster opnieuw te tekenen. Java2D zal dan zelf schedulen wanneer de paintComponent aangeroepen gaat worden. Je kunt meerdere keren repaint() aanroepen, maar dit betekent dus niet dat er ook meerdere keren opnieuw getekent wordt. Zorg er daarom dus voor dat de actionPerformed niet te veel zware code bevat, omdat er pas opnieuw getekend wordt zodra de actionPerformed afgerond is.
 
 **Let op: de volgende code gaat dus niet werken:**
 
@@ -236,7 +241,7 @@ public class HelloAnimation extends JPanel implements ActionListener {
 
     private double angle = 0;
 
-    HelloAnimation()
+    public HelloAnimation()
     {
         Timer t = new Timer(1000/60, this);
         t.start();
@@ -271,7 +276,7 @@ public class HelloAnimation extends JPanel implements ActionListener {
 
 De timer wordt standaard 60x per seconde aangeroepen, maar als de applicatie op een minder sterke PC uitgevoerd wordt, is het mogelijk dat de 60 beelden per seconde niet gehaald wordt. Dit kan ook gebeuren als er een zware berekening op de achtergrond gedaan wordt. Om er voor te zorgen dat alle objecten dan toch even snel blijven bewegen kunnen we gebruik maken van een tijdsmeting.
 
-Door de tijd te meten tussen de huidige update- en de vorige update-aanroep, kunnen we een factor bepalen die we met alle snelheden kunnen vermenigvuldigen. We krijgen dan de volgende code
+Door de tijd te meten tussen de huidige update- en de vorige update-aanroep, kunnen we een factor bepalen die we met alle snelheden kunnen vermenigvuldigen. We krijgen dan de volgende code:
 
 ```java
 import javax.swing.*;
