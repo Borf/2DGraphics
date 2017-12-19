@@ -3,13 +3,13 @@
 <!-- TOC -->
 - [Java2D](#Java2D)
 - [Makkelijk gebruiken](#Makkelijk-gebruiken)
-- [Lijnen] (#Lijnen)
-- [Kleuren] (#Kleuren)
-- [Transformaties] (#Transformaties)
-- [Combineren van transformaties] (#Combineren-van-transformaties)
-- [Parametrische vergelijkingen] (#Parametrische-vergelijkingen)
-- [Kwaliteit] (#Kwaliteit)
-- [Opgaven] (#Opgaven)
+- [Lijnen](#Lijnen)
+- [Kleuren](#Kleuren)
+- [Transformaties](#Transformaties)
+- [Combineren van transformaties](#Combineren-van-transformaties)
+- [Parametrische vergelijkingen](#Parametrische-vergelijkingen)
+- [Kwaliteit](#Kwaliteit)
+- [Opgaven](#Opgaven)
 <!-- /TOC -->
 
 # Java2D
