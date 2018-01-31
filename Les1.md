@@ -1,15 +1,17 @@
 # Week 1
-
 <!-- TOC -->
-- [Java2D](#Java2D)
-- [Makkelijk gebruiken](#Makkelijk-gebruiken)
-- [Lijnen] (#Lijnen)
-- [Kleuren] (#Kleuren)
-- [Transformaties] (#Transformaties)
-- [Combineren van transformaties] (#Combineren-van-transformaties)
-- [Parametrische vergelijkingen] (#Parametrische-vergelijkingen)
-- [Kwaliteit] (#Kwaliteit)
-- [Opgaven] (#Opgaven)
+
+- [Week 1](#week-1)
+- [Java2D](#java2d)
+    - [Makkelijk gebruiken](#makkelijk-gebruiken)
+    - [Lijnen](#lijnen)
+    - [Kleuren](#kleuren)
+    - [Transformaties](#transformaties)
+    - [Combineren van transformaties](#combineren-van-transformaties)
+    - [Parametrische vergelijkingen](#parametrische-vergelijkingen)
+    - [Kwaliteit](#kwaliteit)
+    - [Opgaven](#opgaven)
+
 <!-- /TOC -->
 
 # Java2D
