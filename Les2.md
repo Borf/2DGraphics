@@ -292,9 +292,6 @@ Deze afbeeldingen kunnen in IntelliJ gezet worden. In IntelliJ kunnen meerdere m
 
 In dit voorbeeld is een map 'resources', met hierin een map 'images'. Door nu de resources map als root te markeren, kunnen we in code alle subfolders openen, relatief ten opzichte van het project. De bovenstaande texture is dus te openen met ```ImageIO.read(getClass().getResource("/images/texture.jpg"))```.
 
-
-<!-- todo: hoe importeren in IntelliJ - resource folder -->
-
 ## Transformeren van shapes
 
 Naast het transformeren van het hele venster, is het ook mogelijk om een shape los te transformeren, en hier een nieuwe shape van te maken. Op deze manier kunnen we gemakkelijk een enkel object verplaatsen, zonder het hele canvas te verplaatsen of de shape zelf aan te passen. Dit is straks erg handig voor het laten animeren van objecten.
@@ -312,7 +309,14 @@ tx.scale(0.5, 0.5);
 ```
 In deze code worden 2 AffineTransforms gecombineerd, en worden ze verder aangepast. De ```translate```, ```rotate``` en ```scale``` methoden werken op een transform door, en worden dus automatisch gecombineerd. Let hierbij ook weer op de volgorde van transformeren.
 
-_todo:_ matrixvermenigvuldigingen en volgorde
+<!-- _todo:_ matrixvermenigvuldigingen en volgorde-->
+Een AffineTransform bevat een matrix, die steeds aangepast wordt. De ```translate(x1, y2)``` methode maakt bijvoorbeeld de matrix ![matrix](https://latex.codecogs.com/gif.download?%5Cbegin%7Bpmatrix%7D%201%20%26%200%20%26%20x1%20%5C%5C%200%20%26%201%20%26%20y1%20%5Cend%7Bpmatrix%7D). Door deze matrix te vermenigvuldigen met de matrix ![matrix](https://latex.codecogs.com/gif.download?%5Cbegin%7Bpmatrix%7D%201%20%26%200%20%26%20x2%20%5C%5C%200%20%26%201%20%26%20y2%20%5Cend%7Bpmatrix%7D), krijg je de gecombineerde matrix, ![matrix](https://latex.codecogs.com/gif.download?%5Cbegin%7Bpmatrix%7D%201%20%26%200%20%26%20x1+x2%20%5C%5C%200%20%26%201%20%26%20y1+y2%20%5Cend%7Bpmatrix%7D) (ga dit na). Ditzelfde principe werkt ook voor bijvoorbeeld een schaling. Hierij is de volgorde erg belangrijk. Als eerst geschaald wordt, en hierna verplaatst, wordt ook de verplaatsing meegeschaald. We zien dit in de vermenigvuldiging:
+
+![scale1](https://latex.codecogs.com/gif.download?%5Cbegin%7Bpmatrix%7D%201%20%26%200%20%26%20x1%20%5C%5C%200%20%26%201%20%26%20y1%20%5Cend%7Bpmatrix%7D%20%5Ctimes%20%5Cbegin%7Bpmatrix%7D%20s%20%26%200%20%26%200%20%5C%5C%200%20%26%20s%20%26%200%20%5Cend%7Bpmatrix%7D%20%3D%20%5Cbegin%7Bpmatrix%7D%20s%20%26%200%20%26%20x1%20%5C%5C%200%20%26%20s%20%26%20y1%20%5Cend%7Bpmatrix%7D)
+
+![scale2](https://latex.codecogs.com/gif.download?%5Cbegin%7Bpmatrix%7D%20s%20%26%200%20%26%200%20%5C%5C%200%20%26%20s%20%26%200%20%5Cend%7Bpmatrix%7D%20%5Ctimes%20%5Cbegin%7Bpmatrix%7D%201%20%26%200%20%26%20x1%20%5C%5C%200%20%26%201%20%26%20y1%20%5Cend%7Bpmatrix%7D%20%3D%20%5Cbegin%7Bpmatrix%7D%20s%20%26%200%20%26%20s%20%5Ctimes%20x1%20%5C%5C%200%20%26%20s%20%26%20s%20%5Ctimes%20y1%20%5Cend%7Bpmatrix%7D)
+
+Dit kan gebruikt om objecten in een lokaal stelsel op te slaan, en hierna te transformeren naar de juiste positie in de wereld. Hierover meer in het volgende hoofstuk
 
 ### Gebruiken van transformaties - Shape transformeren
 
@@ -355,7 +359,7 @@ class Renderable
 }
 ```
 
-Let bij het gebruik van deze code erop dat het object waar je een shape van maakt om zijn oorsprong draait, dus gebruik bijvoorbeeld een ```new Rectangle(-50,-50,100,100)``` voor een blok dat om zijn middelpunt draait. Deze coördinaten noemen we coördinaten in de lokale ruimte, de 'object space'.
+Deze code tekent een object op een bepaalde positie, met een lokale rotatie en schaal. Deze attributen zijn in code gemakkelijk aan te passen, waardoor zo'n object gemakkelijk verplaatst, gedraait of geschaalt kan worden. Let bij het gebruik van deze code erop dat het object waar je een shape van maakt om zijn oorsprong draait, dus gebruik bijvoorbeeld een ```new Rectangle(-50,-50,100,100)``` voor een blok dat om zijn middelpunt draait. Deze coördinaten noemen we coördinaten in de lokale ruimte, de 'object space'.
 
 ### Gebruiken van transformaties - Camera
 
