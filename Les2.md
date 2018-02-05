@@ -18,6 +18,7 @@
         - [LinearGradientPaint](#lineargradientpaint)
         - [RadialGradientPaint](#radialgradientpaint)
         - [TexturePaint](#texturepaint)
+            - [Textures inladen in IntelliJ](#textures-inladen-in-intellij)
     - [Transformeren van shapes](#transformeren-van-shapes)
         - [Gebruiken van transformaties - Shape transformeren](#gebruiken-van-transformaties---shape-transformeren)
         - [Gebruiken van transformaties - Camera](#gebruiken-van-transformaties---camera)
@@ -281,6 +282,16 @@ public void paintComponent(Graphics g)
 
 }
 ```
+
+#### Textures inladen in IntelliJ
+
+Deze afbeeldingen kunnen in IntelliJ gezet worden. In IntelliJ kunnen meerdere mappen gemarkeerd worden als resource. Deze mappen worden hierna in het buildproces meegenomen, en worden ook in de .jar files gezet. Het aanmaken van een resource map bestaat uit 2 stappen. Eerst moet een map aangemaakt worden (met de afbeelding erin), en deze kan hierna gemarkeerd worden als resources root.
+
+![IntelliJ](les2/intellij_1.png)
+![IntelliJ](les2/intellij_2.png)
+
+In dit voorbeeld is een map 'resources', met hierin een map 'images'. Door nu de resources map als root te markeren, kunnen we in code alle subfolders openen, relatief ten opzichte van het project. De bovenstaande texture is dus te openen met ```ImageIO.read(getClass().getResource("/images/texture.jpg"))```.
+
 
 <!-- todo: hoe importeren in IntelliJ - resource folder -->
 
