@@ -1,6 +1,6 @@
 # 2D Computer graphics met Java2D
 
-Dit is een lessenpakket over Java2D. Deze documentatie is beschikbaar op [github.io](https://borf.github.io/2DGraphics/). In een klein aantal lessen worden basistechnieken van Java2D beschreven, waarna een aantal toepassingen volgen. Bij dit lessenpakket horen een aantal IntelliJ projecten met voorbeeld-broncode die je kunt gebruiken om op verder te bouwen
+Dit is een lessenpakket over Java2D. Deze documentatie is beschikbaar op [github.io](https://borf.github.io/2DGraphics/). In een klein aantal lessen worden basistechnieken van Java2D beschreven, waarna een aantal toepassingen volgen. Bij dit lessenpakket horen een aantal IntelliJ projecten met voorbeeld-broncode die je kunt gebruiken om op verder te bouwen. Deze kun je vinden op [github](https://github.com/borf/2dgraphics_demo)
 
 ## lessen
 
