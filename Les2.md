@@ -83,7 +83,7 @@ De GeneralPath klasse heeft de volgende methoden:
 - ```moveTo(double x, double y)``` Beweegt de cursor naar positie (x,y) zonder een lijn te tekenen.
 - ```lineTo(double x, double y)``` Tekent een lijn van de huidige locatie naar locatie (x,y).
 - ```quadTo(double x1, double y1, double x2, double y2)``` Tekent een bezier curve naar (x2,y2) met steunpunt (x1,y1).
-- ```curveTo(double x1, double y1, double x2, double y2, double x3, double y3)``` Tekent een bezier curve naar (x1,y1) met steunpunten (x2,y2) en (x3,y3).
+- ```curveTo(double x1, double y1, double x2, double y2, double x3, double y3)``` Tekent een bezier curve naar (x3,y3) met steunpunten (x1,y1) en (x2,y2).
 - ```closePath()``` Sluit het pad met een rechte lijn naar het beginpunt.
 
 Om een vorm te vullen, moet je deze altijd afsluiten met closePath, anders kan de inkt weglekken en zou het hele scherm gevuld worden.
