@@ -1,4 +1,4 @@
-# Week 2
+﻿# Week 2
 
 <!-- TOC -->
 
@@ -82,7 +82,7 @@ De GeneralPath klasse heeft de volgende methoden:
 
 - ```moveTo(double x, double y)``` Beweegt de cursor naar positie (x,y) zonder een lijn te tekenen.
 - ```lineTo(double x, double y)``` Tekent een lijn van de huidige locatie naar locatie (x,y).
-- ```quadTo(double x1, double y1, double x2, double y2)``` Tekent een bezier curve naar (x1,y1) met steunpunt (x2,y2).
+- ```quadTo(double x1, double y1, double x2, double y2)``` Tekent een bezier curve naar (x2,y2) met steunpunt (x1,y1).
 - ```curveTo(double x1, double y1, double x2, double y2, double x3, double y3)``` Tekent een bezier curve naar (x1,y1) met steunpunten (x2,y2) en (x3,y3).
 - ```closePath()``` Sluit het pad met een rechte lijn naar het beginpunt.
 
