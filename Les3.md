@@ -332,7 +332,7 @@ public class HelloAnimation extends JPanel implements ActionListener {
 ```
 
 ## Opgaven
-1. Maak een applicatie die de tekst 'regenboog', in de vorm van een regenboog, in regenboogkleuren tekent. [![rainbow](les3/rainbow.png?thumbright)](les3/rainbow.png)
+1. [![rainbow](les3/rainbow.png?thumbright)](les3/rainbow.png)Maak een applicatie die de tekst 'regenboog', in de vorm van een regenboog, in regenboogkleuren tekent. Je hoeft hiervoor niet de coordinaten van de letters te berekenen, maar dit kun je doen door middel van AffineTransform transformaties (eerst roteren, dan omhoog zetten)
 
 2. [![spritesheet](les3/platformer_sprites.gif?right)](les3/platformer_sprites_base.png)Download de gelinkte spritesheet van het lopende karakter. Laad deze afbeelding in, en hak deze op in stukjes. Laat hierna het karakter van links naar rechts over het venster lopen, met de loop-animatie. Laat zodra er met de muis geklikt wordt, de sprite stilstaan en een aanvalanimatie afspelen
 
