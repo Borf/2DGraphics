@@ -332,9 +332,9 @@ public class HelloAnimation extends JPanel implements ActionListener {
 ```
 
 ## Opgaven
-1. Maak een applicatie die de tekst 'regenboog', in de vorm van een regenboog, in regenboogkleuren tekent. ![rainbow](les3/rainbow.png)
+1. Maak een applicatie die de tekst 'regenboog', in de vorm van een regenboog, in regenboogkleuren tekent. [![rainbow](les3/rainbow.png?thumbright)](les3/rainbow.png)
 
-2. [![spritesheet](les3/platformer_sprites.gif?right)](les3/platformer_sprite_base.png)Download de gelinkte spritesheet van het lopende karakter. Laad deze afbeelding in, en hak deze op in stukjes. Laat hierna het karakter van links naar rechts over het venster lopen, met de loop-animatie. Laat zodra er met de muis geklikt wordt, de sprite stilstaan en een aanvalanimatie afspelen
+2. [![spritesheet](les3/platformer_sprites.gif?right)](les3/platformer_sprites_base.png)Download de gelinkte spritesheet van het lopende karakter. Laad deze afbeelding in, en hak deze op in stukjes. Laat hierna het karakter van links naar rechts over het venster lopen, met de loop-animatie. Laat zodra er met de muis geklikt wordt, de sprite stilstaan en een aanvalanimatie afspelen
 
 3. Maak een applicatie die 2 afbeeldingen inlaad, en rustig tussen deze 2 afbeeldingen fade. Maak hierbij gebruik van alpha blending om een rustige overgang tussen de 2 afbeeldingen te maken. 
 
