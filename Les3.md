@@ -39,7 +39,7 @@ Om een font te maken kan gebruik worden gemaakt van de [```Font(String name, int
 - Font.PLAIN
 - Font.BOLD
 - Font.ITALIC
-- Font.BOLD | Font.ITALIC
+- Font.BOLD &#124; Font.ITALIC
 
 Daarnaast is het mogelijk om direct een TrueType font in te laden uit een bestand (dat je bijvoorbeeld mee kunt leveren met je applicatie), met de statische createFont methode:
 
@@ -332,7 +332,10 @@ public class HelloAnimation extends JPanel implements ActionListener {
 ```
 
 ## Opgaven
-1. Maak een applicatie die de tekst 'regenboog', in de vorm van een regenboog in regenboogkleuren tekent
-2. Doe iets met een spritesheet
-3. Maak de oude windows lijnen-screensaver
-4. Doe iets met alpha blending
+1. Maak een applicatie die de tekst 'regenboog', in de vorm van een regenboog, in regenboogkleuren tekent. ![rainbow](les3/rainbow.png)
+
+2. [![spritesheet](les3/platformer_sprites.gif?right)](les3/platformer_sprite_base.png)Download de gelinkte spritesheet van het lopende karakter. Laad deze afbeelding in, en hak deze op in stukjes. Laat hierna het karakter van links naar rechts over het venster lopen, met de loop-animatie. Laat zodra er met de muis geklikt wordt, de sprite stilstaan en een aanvalanimatie afspelen
+
+3. Maak een applicatie die 2 afbeeldingen inlaad, en rustig tussen deze 2 afbeeldingen fade. Maak hierbij gebruik van alpha blending om een rustige overgang tussen de 2 afbeeldingen te maken. 
+
+4. ![screensaver](les3/screensaver.gif)Maak de oude windows lijnen-screensaver. Deze screensaver bestaat uit een aantal punten (4 in de afbeelding bij de opgave), die over het scherm stuiteren. Zodra ze een rand van het scherm aanraken gaan ze de andere richting op (dus als x < 0, xrichting = -xrichting, etc). Daarna worden er lijnen tussen deze punten getekend. Voor ieder punt wordt daarnaast een geschiedenis opgeslagen, die gebruikt worden om de oude lijnen ook te tekenen
