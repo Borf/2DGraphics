@@ -15,7 +15,10 @@ img[src$="left"] {
     float: left;
     margin-right: 25px;
   }
-
+img[src*="thumb"] {
+  width: 150px;
+  height: auto;
+}
 h1,h2,h3 { clear: both;}
 
 .language-java { clear: both; }
