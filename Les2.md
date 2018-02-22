@@ -469,7 +469,7 @@ Van het MouseEvent kunnen een aantal eigenschappen opgevraagd worden. Zo kun je 
 3. Teken een programma dat 13 vierkanten naast elkaar tekent met alle kleuren die standaard in java zitten: black, blue, cyan, darkGray, gray, green, lightGray, magenta, orange, pink, red, white, yellow.
 4. Teken een programma dat een rechthoek tekent over het gehele scherm met een RadialGradientPaint. Kies hier zelf een aantal kleuren voor uit, maar leg het centrum van de RadialPaint in het midden van het scherm (met getWidth()/2 en getHeight()/2). Voeg hierna een mousemotion listener toe, en leg het focuspunt van de RadialPaint op de locatie van de muis.
 5. Maak een applicatie die een assenstelsel tekent, de lijn Y = 2.5 × X, en een vierkant van 100x100 met het middelpunt op 0,150. Teken hierna dit vierkant, maar dan gespiegeld over de lijn Y = 2.5 × X. Voor spiegelen kun je de matrix [] gebruiken.
-6. Maak een applicatie om blokken te slepen, met een camera. Door met de rechtermuisknop te slepen kun je het complete scherm verslepen, met het scrollwieltje kun je de camera inzoomen en uitzoomen, en met de linker muisknop kun je een blok verslepen.
+6. **Uitdaging** Maak een applicatie om blokken te slepen, met een camera. Door met de rechtermuisknop te slepen kun je het complete scherm verslepen, met het scrollwieltje kun je de camera inzoomen en uitzoomen, en met de linker muisknop kun je een blok verslepen.
 
 ![Block Dragger](les2/blocks.gif)
 
