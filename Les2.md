@@ -359,7 +359,38 @@ class Renderable
 }
 ```
 
-Deze code tekent een object op een bepaalde positie, met een lokale rotatie en schaal. Deze attributen zijn in code gemakkelijk aan te passen, waardoor zo'n object gemakkelijk verplaatst, gedraait of geschaalt kan worden. Let bij het gebruik van deze code erop dat het object waar je een shape van maakt om zijn oorsprong draait, dus gebruik bijvoorbeeld een ```new Rectangle(-50,-50,100,100)``` voor een blok dat om zijn middelpunt draait. Deze coördinaten noemen we coördinaten in de lokale ruimte, de 'object space'.
+Deze code tekent een object op een bepaalde positie, met een lokale rotatie en schaal. Deze attributen zijn in code gemakkelijk aan te passen, waardoor zo'n object gemakkelijk verplaatst, gedraait of geschaalt kan worden. Let bij het gebruik van deze code erop dat het object waar je een shape van maakt om zijn oorsprong draait, dus gebruik bijvoorbeeld een ```new Rectangle(-50,-50,100,100)``` voor een blok dat om zijn middelpunt draait. Deze coördinaten noemen we coördinaten in de lokale ruimte, de 'object space'. Om dit object te gebruiken kun je de volgende code gebruiken:
+
+```java
+public class HelloRenderable extends JPanel {
+    public static void main(String[] args)
+    {
+        JFrame frame = new JFrame("Hello Java2D");
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setMinimumSize(new Dimension(800, 600));
+        frame.setExtendedState(frame.getExtendedState() | JFrame.MAXIMIZED_BOTH);
+        frame.setContentPane(new HelloRenderable());
+        frame.setVisible(true);
+    }
+
+    ArrayList<Renderable> renderables = new ArrayList<>();
+    HelloRenderable()
+    {
+        renderables.add(new Renderable(new Rectangle2D.Double(-50,-50,100,100), new Point2D.Double(400,400), 0.25f * (float)Math.PI, 0.75));
+        renderables.add(new Renderable(new Rectangle2D.Double(-50,-50,100,100), new Point2D.Double(600,400), -0.25f * (float)Math.PI, 1.75));
+    }
+
+    public void paintComponent(Graphics g)
+    {
+        super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D)g;
+
+        for(Renderable r : renderables)
+            r.draw(g2d);
+
+    }
+}
+```
 
 ### Gebruiken van transformaties - Camera
 
