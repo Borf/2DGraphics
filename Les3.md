@@ -161,7 +161,7 @@ Daarnaast is bij sommige composite rules ook een floating point alpha waarde op 
 
 ## Clipping
 
-[![Clipping](les3/clipping.png?thumbright)](les3/clipping.png) Het is ook mogelijk om het tekenen op bepaalde gebieden van het scherm uit te zetten, zodat er niet getekent wordt. Dit noemen we clipping. De Graphics2D klasse heeft een ```setClip(Shape shape)``` methode, die een clipping-shape instelt. Als je ```null``` meegeeft als parameter, wordt de clipping uitgezet, en anders kan er alleen binnen de vorm getekend worden die je meegeeft. Dit kun je gebruiken om bijvoorbeeld een spotlight-effect te maken, of een vorm opvullen met andere shapes.
+[![Clipping](les3/clip.gif?thumbright)](les3/clipping.png) Het is ook mogelijk om het tekenen op bepaalde gebieden van het scherm uit te zetten, zodat er niet getekent wordt. Dit noemen we clipping. De Graphics2D klasse heeft een ```setClip(Shape shape)``` methode, die een clipping-shape instelt. Als je ```null``` meegeeft als parameter, wordt de clipping uitgezet, en anders kan er alleen binnen de vorm getekend worden die je meegeeft. Dit kun je gebruiken om bijvoorbeeld een spotlight-effect te maken, of een vorm opvullen met andere shapes.
 
 ## Animeren met timers
 
@@ -336,6 +336,8 @@ public class HelloAnimation extends JPanel implements ActionListener {
 
 2. [![spritesheet](les3/platformer_sprites.gif?right)](les3/platformer_sprites_base.png)Download de gelinkte spritesheet van het lopende karakter. Laad deze afbeelding in, en hak deze op in stukjes. Laat hierna het karakter van links naar rechts over het venster lopen, met de loop-animatie. Laat zodra er met de muis geklikt wordt, de sprite stilstaan en een aanvalanimatie afspelen
 
-3. Maak een applicatie die 2 afbeeldingen inlaad, en rustig tussen deze 2 afbeeldingen fade. Maak hierbij gebruik van alpha blending om een rustige overgang tussen de 2 afbeeldingen te maken. 
+3. ![transition](les3/alpha.gif?right)Maak een applicatie die 2 afbeeldingen inlaad, en rustig tussen deze 2 afbeeldingen fade. Maak hierbij gebruik van alpha blending om een rustige overgang tussen de 2 afbeeldingen te maken. 
 
-4. [![screensaver](les3/screensaver.gif?thumbright)](les3/screensaver.gif)Maak de oude windows lijnen-screensaver. Deze screensaver bestaat uit een aantal punten (4 in de afbeelding bij de opgave), die over het scherm stuiteren. Zodra ze een rand van het scherm aanraken gaan ze de andere richting op (dus als x < 0, xrichting = -xrichting, etc). Daarna worden er lijnen tussen deze punten getekend. Voor ieder punt wordt daarnaast een geschiedenis opgeslagen, die gebruikt worden om de oude lijnen ook te tekenen
+4. ![clip](les3/clip.gif?thumbright)Maak een applicatie waarbij je met een soort 'spotlight' effect een achterliggende afbeelding kunt bekijken. Geef de spotlight een creatieve vorm.
+
+5. [![screensaver](les3/screensaver.gif?thumbright)](les3/screensaver.gif)Maak de oude windows lijnen-screensaver. Deze screensaver bestaat uit een aantal punten (4 in de afbeelding bij de opgave), die over het scherm stuiteren. Zodra ze een rand van het scherm aanraken gaan ze de andere richting op (dus als x < 0, xrichting = -xrichting, etc). Daarna worden er lijnen tussen deze punten getekend. Voor ieder punt wordt daarnaast een geschiedenis opgeslagen, die gebruikt worden om de oude lijnen ook te tekenen
