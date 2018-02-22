@@ -376,8 +376,8 @@ public class HelloRenderable extends JPanel {
     ArrayList<Renderable> renderables = new ArrayList<>();
     HelloRenderable()
     {
-        renderables.add(new Renderable(new Rectangle2D.Double(-50,-50,100,100), new Point2D.Double(400,400), 0.25f * (float)Math.PI, 0.75));
-        renderables.add(new Renderable(new Rectangle2D.Double(-50,-50,100,100), new Point2D.Double(600,400), -0.25f * (float)Math.PI, 1.75));
+        renderables.add(new Renderable(new Rectangle2D.Double(-50,-50,100,100), new Point2D.Double(400,400), 0.25f * (float)Math.PI, 0.75f));
+        renderables.add(new Renderable(new Rectangle2D.Double(-50,-50,100,100), new Point2D.Double(600,400), -0.25f * (float)Math.PI, 1.75f));
     }
 
     public void paintComponent(Graphics g)
