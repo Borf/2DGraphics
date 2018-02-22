@@ -336,8 +336,8 @@ public class HelloAnimation extends JPanel implements ActionListener {
 
 2. [![spritesheet](les3/platformer_sprites.gif?right)](les3/platformer_sprites_base.png)Download de gelinkte spritesheet van het lopende karakter. Laad deze afbeelding in, en hak deze op in stukjes. Laat hierna het karakter van links naar rechts over het venster lopen, met de loop-animatie. Laat zodra er met de muis geklikt wordt, de sprite stilstaan en een aanvalanimatie afspelen
 
-3. ![transition](les3/alpha.gif?right)Maak een applicatie die 2 afbeeldingen inlaad, en rustig tussen deze 2 afbeeldingen fade. Maak hierbij gebruik van alpha blending om een rustige overgang tussen de 2 afbeeldingen te maken. 
+3. ![transition](les3/alpha.gif?right)Maak een applicatie die 2 afbeeldingen inlaad, en rustig tussen deze 2 afbeeldingen fade. Maak hierbij gebruik van alpha blending om een rustige overgang tussen de 2 afbeeldingen te maken. Let op dat je bij een overgang eigenlijk maar 1 afbeelding tegelijk blend. De oude afbeelding blijft op 100% opacity staan, de nieuwe afbeelding gaat langzaam van 0% naar 100% opacity. Een extra uitdaging is om deze opgave met een lijst van afbeeldingen te maken, zodat verschillende afbeeldingen elkaar opvolgen.
 
-4. ![clip](les3/clip.gif?thumbright)Maak een applicatie waarbij je met een soort 'spotlight' effect een achterliggende afbeelding kunt bekijken. Geef de spotlight een creatieve vorm.
+4. ![clip](les3/clip.gif?thumbright)Maak een applicatie waarbij je met een soort 'spotlight' effect een achterliggende afbeelding kunt bekijken. Geef de spotlight een creatieve vorm. Laat hierbij de spotlight de muis volgen.
 
 5. [![screensaver](les3/screensaver.gif?thumbright)](les3/screensaver.gif)Maak de oude windows lijnen-screensaver. Deze screensaver bestaat uit een aantal punten (4 in de afbeelding bij de opgave), die over het scherm stuiteren. Zodra ze een rand van het scherm aanraken gaan ze de andere richting op (dus als x < 0, xrichting = -xrichting, etc). Daarna worden er lijnen tussen deze punten getekend. Voor ieder punt wordt daarnaast een geschiedenis opgeslagen, die gebruikt worden om de oude lijnen ook te tekenen
