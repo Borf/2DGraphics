@@ -58,7 +58,7 @@ public void paintComponent(Graphics g)
     Graphics2D g2d = (Graphics2D)g;
 
     Font font = new Font("Arial", Font.PLAIN, 30);
-    Shape shape = font.createGlyphVector(g2d.getFontRenderContext(), "Hello World");
+    Shape shape = font.createGlyphVector(g2d.getFontRenderContext(), "Hello World").getOutline();
     g2d.draw(shape);
     g2d.draw(AffineTransform.getTranslateInstance(100,100).createTransformedShape(shape));
 }
@@ -98,7 +98,7 @@ class HelloImage extends JPanel
 }
 ```
 
-Op deze manier wordt een afbeelding maar 1x ingeladen (in de constructor), en steeds herbruikt met het tekenen.
+Op deze manier wordt een afbeelding maar 1x ingeladen (in de constructor), en steeds herbruikt met het tekenen. Let er wederom op dat de directory waar de afbeelding in staat gemarkeerd is als resource root, zoals in les2 is besproken
 
 ### SpriteSheets
 
