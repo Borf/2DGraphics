@@ -235,14 +235,17 @@ Een blob is te modelleren als een centrum met een buitenkant.
 
 ## Opdrachten
 
-1) Bouw de verlet particle engine na met de code in de bovenstaande les.
+1. Bestudeer de verlet engine die in de les is gebouwd
 
-2) Voeg de mogelijkheid toe om particles toe te voegen.
-
+2. Voeg extra modelijkheden toe om punten en distance constraints toe te voegen aan het systeem
     - Zonder modifier een losse particle
     - Met Ctrl ingedrukt een particle met een StaticConstraint
     - Met Shift ingedrukt een particle met een DistanceContstraint naar de dichtsbijzijnde andere particle
 
-3) Voeg de mogelijkheid toe om een doek toe te voegen.
+3. Verkleur de constraints op basis van de kracht die op een constraint staat. De 'kracht' kun je krijgen door het verschil te nemen van de lengte tussen de 2 punten, en de lengte die het zou moeten zijn
 
-4) Zorg ervoor dat de scene opgeslagen en ingeladen kan worden.
+4. Maak een nieuwe constraint toe, RopeConstraint, die alleen punten dichter naar elkaar zet als de punten te ver weg van elkaar zijn, maar als de punten te dicht bij elkaar zijn niets doet
+
+5. Voeg de mogelijkheid toe om een doek toe te voegen.
+
+6. Zorg ervoor dat de scene opgeslagen en ingeladen kan worden.
