@@ -229,15 +229,27 @@ Fixtures bevatten informatie over de vormen van je Bodies. Je kunt verschillende
 
 Deze shapes zijn vanwege efficientie veel specifieker dan in het tekenen met Java2D. Collision met een cirkel is gemakkelijker te berekenen dan collision met een ellipse. Gebruik dus altijd de simpelste vorm.
 
-Daarnaast kun je in een fixture restitution
+Daarnaast kun je in een fixture de 'restitution', 'friction' en 'density' instellen.
+
+- Restitution is hoe hard een object stuitert als het tegen een ander object aanbotst. Standaard, als 2 objecten tegen elkaar botsen, zal de restitution van de 2 objecten gecombineerd worden door middel van de max() functie (zie [documentatie](http://docs.dyn4j.org/v3.2.4/org/dyn4j/dynamics/CoefficientMixer.html))
+
+- Friction is de wrijving, het afremmen van objecten als ze over elkaar heenschuiven. Standaard zal de wrijving van de 2 objecten gecombineerd worden met de formule ![formula](https://latex.codecogs.com/gif.latex?%5Csqrt%7Bfriction1%20%5Ctimes%20friction2%7D)  [documentatie](http://docs.dyn4j.org/v3.2.4/org/dyn4j/dynamics/CoefficientMixer.html))
 
 ## Joints
 
+Een Joint is een koppeling tussen verschillende RigidBodies. Door deze koppelingen kan het gedrag van de objecten gelimiteerd worden, om bepaalde effecten te krijgen. Zo is het bijvoorbeeld mogelijk slingers te maken, touw of autos met draaiende wielen en vering. Hieronder worden een aantal joints behandeld, maar meer informatie staat [in de documentatie](http://www.dyn4j.org/documentation/joints/).
+
 ### Distance Joint
+
+[![distance](les5/distance-joint.png?thumbright)](les5/distance-joint.png)De distance joint is een joint om een vaste afstand tussen 2 punten op de bodies vast te houden. Er zijn verder geen beperkingen in rotaties, dus beide objecten kunnen vrij ronddraaien. Let erop dat de locaties van de ankers belangrijk is, deze worden opgegeven in wereldcoördinaten bij het aanmaken van de joint
 
 ### Revolute Joint
 
+[![revolute](les5/revolute-joint.png?thumbright)](les5/revolute-joint.png)Een revolute joint is een joint die alleen kan draaien, maar waarbij geen beweging mogelijk is. Er wordt 1 punt opgegeven, het draaipunt, waar de objecten aan elkaar verankert worden. Deze joint is bijvoorbeeld te gebruiken voor slingers of wielen.
+
 ### Weld Joint
+
+[![weld](les5/weld-joint.png?thumbright)](les5/weld-joint.png)Een weld joint maakt 2 objecten aan elkaar vast, zonder flexibiliteit. Een weld joint is nog wel 'soft', dus bij veel kracht kan een weld joint wel gesplitst worden, maar deze zal wel terug naar elkaar trekken.
 
 ### Prismatic Joint
 
