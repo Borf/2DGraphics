@@ -238,9 +238,11 @@ Een blob is te modelleren als een centrum met een buitenkant.
 1. Bestudeer de verlet engine die in de les is gebouwd
 
 2. Voeg extra modelijkheden toe om punten en distance constraints toe te voegen aan het systeem
-    - Zonder modifier een losse particle
-    - Met Ctrl ingedrukt een particle met een StaticConstraint
-    - Met Shift ingedrukt een particle met een DistanceContstraint naar de dichtsbijzijnde andere particle
+    - Als gewoon links geklikt wordt voeg een particle toe met 1 constraint
+    - Als gewoon rechts geklikt wordt, voeg een particle toe met 2 distance constraints.
+    - Als Ctrl-rechts geklikt wordt, voeg een particle toe met 2 distance constraints met 2 vaste lengtes (bijvoorbeeld 100)
+    - Als shift-rechts geklikt wordt, voeg een constraint toe tussen de 2 dichtsbijzijnde particles
+    - Met Ctrl-links geklikt een particle met een StaticConstraint op dat punt
 
 3. Verkleur de constraints op basis van de kracht die op een constraint staat. De 'kracht' kun je krijgen door het verschil te nemen van de lengte tussen de 2 punten, en de lengte die het zou moeten zijn
 
