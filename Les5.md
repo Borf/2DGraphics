@@ -245,20 +245,35 @@ Een Joint is een koppeling tussen verschillende RigidBodies. Door deze koppeling
 
 ### Revolute Joint
 
-[![revolute](les5/revolute-joint.png?thumbright)](les5/revolute-joint.png)Een revolute joint is een joint die alleen kan draaien, maar waarbij geen beweging mogelijk is. Er wordt 1 punt opgegeven, het draaipunt, waar de objecten aan elkaar verankert worden. Deze joint is bijvoorbeeld te gebruiken voor slingers of wielen.
+[![revolute](les5/revolute-joint.png?thumbright)](les5/revolute-joint.png)Een revolute joint is een joint die alleen kan draaien, maar waarbij geen beweging mogelijk is. Er wordt 1 punt opgegeven, het draaipunt, waar de objecten aan elkaar verankert worden. Deze joint is bijvoorbeeld te gebruiken voor slingers of wielen. Het is ook mogelijk een motor op deze joint te zetten, om de objecten automatisch rond te laten draaien
 
 ### Weld Joint
 
-[![weld](les5/weld-joint.png?thumbright)](les5/weld-joint.png)Een weld joint maakt 2 objecten aan elkaar vast, zonder flexibiliteit. Een weld joint is nog wel 'soft', dus bij veel kracht kan een weld joint wel gesplitst worden, maar deze zal wel terug naar elkaar trekken.
+[![weld](les5/weld-joint.png?thumbright)](les5/weld-joint.png)Een weld joint maakt 2 objecten aan elkaar vast, zonder flexibiliteit. Een weld joint is nog wel 'soft', dus bij veel kracht kan een weld joint wel gesplitst worden met grote krachten, maar deze zal wel terug naar elkaar trekken.
 
 ### Prismatic Joint
+[![weld](les5/prismatic-joint.png?thumbright)](les5/prismatic-joint.png)Een prismatic joint maakt 2 objecten aan elkaar vasts, waarbij de afstand tussen de 2 kan variëren, maar niet de hoek. Je kunt het dus zien alsof de objecten met een soort rails aan elkaar vast zitten. Het is ook mogelijk met een motor deze joint te zetten, deze zal de objecten dan lineair voortbewegen
 
 ## Raycasting en collision testing
 
+![raycasting](les5/raycasting-input.png)
+
+Het is mogelijk in de wereld te testen of objecten geraakt worden door een ray, die noemen we raycasting. Het world object heeft een aantal [```raycast()```](http://docs.dyn4j.org/v3.2.4/org/dyn4j/dynamics/World.html#raycast-org.dyn4j.geometry.Ray-org.dyn4j.dynamics.Body-double-boolean-org.dyn4j.dynamics.RaycastResult-) methoden waarmee de wereld bekeken kan worden. Dit kan handig zijn voor bijvoorbeeld het schieten van een geweer of laser, om te bepalen wat er geraakt wordt.
+
+Voor collision detection kunnen verschillende mechanismen gebruikt worden. Het is makkelijk om op te vragen welke bodies in contact zijn. Met de (```RigidBody.getInContactBodies()```)[http://docs.dyn4j.org/v3.2.4/org/dyn4j/dynamics/Body.html#getInContactBodies-boolean-] methode is op te vragen welke bodies in contact zijn met deze body, en dus een collision hebben.
+
+## Beïnvloeden van objecten
+
+In een normale game worden objecten meestal beïnvloed door de positie aan te passen. In een physics engine is dit niet altijd een goed idee, omdat dan alle interne krachten op een body opgeheft worden. Als je een object, zoals een speler, wil verschuiven is het beter om een kracht op dit object uit te oefenen. Deze kracht kun je toevoegen met de ```applyForce``` methode, waarbij optioneel een punt meegegeven kan worden, waar de kracht toegepast wordt. Om het object rond te laten draaien is de ```applyImpulse()``` te gebruiken.
+
 ## Gebruik - Het slepen van een object met je muis
+
 
 ## Opdrachten
 
 1. Maak angry birds
-
-2. 
+    - Maak een wereld met aan de rechterkant een aantal blokken
+    - Zet aan de linkerkant een katapult die objecten kan schieten
+    - Om de katapult te besturensleep je het object in de katapult naar links, en als je deze loslaat schiet deze naar rechts
+        - Dit kan lastig zijn, je zou ook de input doen door middel van 2 inputboxen, de force  en de hoek waaronder je schiet
+    - ***uitdaging*** Zodra een blok hard geraakt wordt, verdwijnt het. Zodra alle blokken weg zijn heb je 't spel gewonnen
