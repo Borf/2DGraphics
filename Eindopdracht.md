@@ -3,6 +3,23 @@
 De module 2D graphics wordt beoordeeld met de bespreking van een individueel gemaakte eindopdracht. In lesweek 6/7 worden de individuele opdrachten uitgereikt, de besprekingen vinden plaats in lesweek 8/9. In de tussentijd is er voor iedereen de gelegenheid de individuele opdracht uit te werken.
 De individuele opdrachten zijn gecategoriseerd in moeilijkheid en/of complexiteit. De student mag zelf kiezen uit welke categorie een opdracht wordt gekozen. Wel is het zo dat een opdracht van een lagere complexiteit natuurlijk een minder hoog cijfer biedt. Dit maakt het mogelijk dat iedereen een opdracht op zijn/haar niveau kan kiezen en deze module met succes kan afronden. Daarnaast worden de gemaakte opgaven meegenomen in de beoordeling
 
+<!-- TOC -->
+
+- [Eindopdracht](#eindopdracht)
+    - [Categorie 1 - Makkelijke opgave (cijfer richtlijn 6-7)](#categorie-1---makkelijke-opgave-cijfer-richtlijn-6-7)
+        - [Geanimeerde tekst](#geanimeerde-tekst)
+        - [Robotarm](#robotarm)
+    - [Categorie 2 - Gemiddelde moelijkheid (cijfer richtlijn 7-8.5)](#categorie-2---gemiddelde-moelijkheid-cijfer-richtlijn-7-85)
+        - [Particle Simulatie](#particle-simulatie)
+        - [Fractals](#fractals)
+        - [2D physics sandbox](#2d-physics-sandbox)
+    - [Categorie 3 - Moeilijk (8.5+)](#categorie-3---moeilijk-85)
+        - [2D Physics game](#2d-physics-game)
+        - [Particle Flow](#particle-flow)
+        - [Vrije opdracht](#vrije-opdracht)
+
+<!-- /TOC -->
+
 ## Categorie 1 - Makkelijke opgave (cijfer richtlijn 6-7)
 
 ### Geanimeerde tekst
