@@ -14,5 +14,7 @@ Dit is een lessenpakket over Java2D. Deze documentatie is beschikbaar op [github
   - [Opgaven](Les4#opgaven)
 - [Les 5 - Box2D Physics Engine](Les5)
   - [Opgaven](Les5#opgaven)
-- [Les 6 - Platformer Game](Les6)
-  - [Opgaven](Les6#opgaven)
+- [Les 6 - Flappy Bird](Les6)
+- [Les 7 - Platformer game](Les7)
+
+[Eindopdracht](Eindopdracht)
