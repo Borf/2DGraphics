@@ -201,8 +201,63 @@ public void update(double elapsedTime, Level level) {
 
 ### Toetsenbord
 
+Om het toetsenbord af te handelen moet er een keylistener toegevoegd worden. Deze werkt echter event-driven (er wordt een methode aangeroepen op 't moment dat er op een toets gedrukt wordt), en dit is niet goed geschikt voor games. Dit moet dus omgezet worden naar een poll-systeem, waarbij we iedere update kunnen kijken of een toets is ingedrukt. Door een boolean array bij te houden met alle toetsen die zijn ingedrukt, kan snel getest worden of een toets ingedrukt is. Dit kan met de volgende code:
 
-## De camera 
+```java
+private boolean keys[] = new boolean[255];
+Platformer()
+{
+    setFocusable(true);
+    addKeyListener(new KeyAdapter() {
+        public void keyPressed(KeyEvent e) {
+            keys[e.getKeyCode()] = true;
+        }
+        public void keyReleased(KeyEvent e) {
+            keys[e.getKeyCode()] = false;
+        }
+    });
+}
+```
+
+Door nu in de code te testen op keys[KeyEvent.VK_RIGHT] is te testen of bijvoorbeeld het pijltje naar rechts is ingedrukt. Op basis hiervan kunnen we de speler gaan aanpassen en beïnvloeden. In de actionPerformed kan gekeken worden of de speler een richting op moet lopen, en op basis hiervan de snelheid van de speler aanpassen. Het springen werkt hetzelfde, maar mag alleen gebeuren als de speler op de grond staat.
+
+Het springen in een platformgame werkt door de speler voor een kleine tijd een opwaardse snelheid te geven. Deze tijd kan bijgehouden worden in een attribuut, de ```jumpTime```. Dit kunnen we hierna combineren in de volgende code
+
+```java
+if (keys[KeyEvent.VK_RIGHT]) {
+    double newX = Math.min(150, player.speed.getX() + 5000 * elapsedTime);
+    player.speed = new Point2D.Double(newX, player.speed.getY());
+} else if (keys[KeyEvent.VK_LEFT]) {
+    double newX = Math.max(-150, player.speed.getX() - 5000 * elapsedTime);
+    player.speed = new Point2D.Double(newX, player.speed.getY());
+} else {
+    double newX = player.speed.getX() * 0.9;
+    player.speed = new Point2D.Double(newX, player.speed.getY());
+}
+
+
+if (keys[KeyEvent.VK_UP]) {
+    if (player.isOnFloor(level)) {
+        player.speed = new Point2D.Double(player.speed.getX(), -150);
+        jumpTime = 0.25;
+    } else if (jumpTime > 0 && player.speed.getY() < 0) {
+        jumpTime -= elapsedTime;
+        player.speed = new Point2D.Double(player.speed.getX(), -150);
+    }
+} else
+    jumpTime = 0;
+```
+
+## De camera
+
+De camera in de platformgame is eigenlijk erg simpel. Deze schuift achter de speler aan, maar alleen als de speler te veel naar rechts schuift. Dit kan bijvoorbeeld met de volgende code:
+
+```java
+if(player.position.getX() - cameraX > 140)
+    cameraX = player.position.getX() - 140;
+```
+
+
 
 ## Het gameobject
 
