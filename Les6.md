@@ -70,3 +70,59 @@ De snelheid wordt met een factor 15 gedeeld, om deze om te zetten naar een hoek.
 
 ## De obstakels
 
+De obstakels zijn buizen die van rechts naar links door het scherm scrollen. Per obstakel moeten dus 2 floating-point variabelen opslagen worden, hoe ver is de buis gescrolled, en op welke hoogte het gat tussen de buizen zit. Deze 2 waarden kunnen in een losse klasse opgeslagen worden zoals
+
+```java
+class Pipe
+{
+    private float xposition;
+    private float height;
+}
+```
+
+Maar deze 2 cöordinaten kunnen ook in een Point2D opgeslagen worden. De x-waarde stelt dan de positie horizontaal voor, en de y-waarde stelt de hoogte van 't gat voor. Er kunnen meerdere buizen tegelijk op het scherm komen, dus deze worden in een ArrayList opgeslagen. Door een teller bij te houden kan na een bepaalde tijd een nieuwe buis toegevoegd worden. Deze buizen kunnen we hierna tekenen in de paintComponent, door de positie te berekenen
+
+```java
+private ArrayList<Point2D> pipes = new ArrayList<>();
+private double pipeCounter = 0;
+private final double gapSize = 100;
+
+
+public void actionPerformed(ActionEvent e)
+{
+    pipeCounter--;
+    if(pipeCounter < 0)
+    {
+        //spawn pipe
+        pipeCounter = 50 + 100 * Math.random();
+    }
+
+    for(Point2D pipe : pipes)
+    {
+        pipe.setLocation(pipe.getX()-3, pipe.getY());
+    }
+}
+
+public void paintComponent(Graphics g)
+{
+    Graphics2D g2d = (Graphics2D)g;
+
+    for(Point2D pipe : pipes)
+    {
+        AffineTransform pipeTransform = new AffineTransform();
+        pipeTransform.translate(pipe.getX(), pipe.getY() - gapSize - pipeUp.getHeight()*2);
+        pipeTransform.scale(2,2);
+        g2d.drawImage(pipeUp, pipeTransform, null);
+
+        pipeTransform = new AffineTransform();
+        pipeTransform.translate(pipe.getX(), pipe.getY() + gapSize);
+        pipeTransform.scale(2,2);
+        g2d.drawImage(pipeDown, pipeTransform, null);
+    }
+}
+```
+
+De afbeeldingen van de pijpen worden nu boven en onder de opgegeven posities getekend
+
+## Collision
+
