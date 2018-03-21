@@ -131,7 +131,7 @@ Als er geen collision is, laat de speler vallen
 Als er wel een collision is, zet de Y op een op 16-tallen-afgeronde positie (y = floor(y/16)*16), dit zorgt ervoor dat de speler netjes op de grond blijft staan
 ```
 
-Hiervoor moet er vaak gekeken worden of er collision is tussen een speler en het level. Hiervoor is het handig een extra hulpmethode toe te voegen aan het level, de ```hasCollision(double x, double y)```. De x en y zijn in speler-coördinaten (niet in tilecoördinaten of pixelcoördinaten)
+Hiervoor moet er vaak gekeken worden of er collision is tussen een speler en het level. Hiervoor is het handig een extra hulpmethode toe te voegen aan het level, de ```hasCollision(double x, double y)```. De x en y zijn in speler-coördinaten (niet in tilecoördinaten of pixelcoördinaten), en er wordt dus gekeken of dit punt binnen een blokkerende tile
 
 ```java
 int[] blocking = { 0, 1, 2, 3, 10, 11, 26, 27, 32 };
@@ -148,6 +148,58 @@ public boolean hasCollision(double x, double y) {
 }
 ```
 
+Voor de collision moeten we bepaalde punten bekijken in de collisionmap. Als de speler op (x,y) staat, gebruiken we een rechthoek van (x+1, y-1) - (x+15, y-height). Deze rechthoek is dus net iets kleiner dan de sprite zelf. De Y waarde is negatief, omdat een negatieve Y-waarde omhoog gaat. Met de volgende code kan nu een update uitgevoerd worden:
+```java
+public void update(double elapsedTime, Level level) {
+    boolean collision;
+
+    double newX = position.getX() + speed.getX() * elapsedTime;
+    collision = false;
+
+    if(speed.getX() > 0) {
+        if (level.hasCollision(newX + 15, position.getY()-1))
+            collision = true;
+        if (level.hasCollision(newX + 15, position.getY()-height))
+            collision = true;
+    }
+    else if(speed.getX() < 0) {
+        if (level.hasCollision(newX + 1, position.getY()-1))
+            collision = true;
+        if (level.hasCollision(newX + 1, position.getY()-height))
+            collision = true;
+    }
+    //niet tegen de muur gebotst
+    if(!collision || !hasCollision)
+        position = new Point2D.Double(newX, position.getY());
+
+    double newY = position.getY() + speed.getY() * elapsedTime;
+    collision = false;
+
+    //collision feet
+    if(level.hasCollision(position.getX()+1, newY))
+        collision = true;
+    if(level.hasCollision(position.getX()+14, newY))
+        collision = true;
+
+    //collision head
+    if(level.hasCollision(position.getX()+1, newY-height)) {
+        collision = true;
+    }
+    if(level.hasCollision(position.getX()+14, newY-height)) {
+        collision = true;
+    }
+    if(!collision || !hasCollision) {
+        position = new Point2D.Double(position.getX(), newY);
+        speed = new Point2D.Double(speed.getX(), speed.getY() + 300 * elapsedTime);
+    }
+    else {
+        speed = new Point2D.Double(speed.getX(), 0);
+        position = new Point2D.Double(position.getX(), Math.round(position.getY()/16)*16);
+    }
+}
+```
+
+### Toetsenbord
 
 
 ## De camera 
