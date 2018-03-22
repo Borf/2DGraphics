@@ -126,7 +126,7 @@ Voor inspiratie:
 
 ### Particle Flow
 
-Maak een particlesysteem dat gebruik maakt van pathfinding voor de particles. Particles hebben natuurlijk een dynamisch gedrag (snelheid, versnelling). Deze particles hebben verder dezelfde mogelijkheden als die bij de particle simulatie opdracht zijn gegeven (blending, kleur, texture etc). Voor inspiratie, zie [youtube](https://www.youtube.com/watch?v=Bspb9g9nTto)
+Maak een particlesysteem dat gebruik maakt van pathfinding voor de particles. Particles hebben natuurlijk een dynamisch gedrag (snelheid, versnelling). Deze particles hebben verder dezelfde mogelijkheden als die bij de particle simulatie opdracht zijn gegeven (blending, kleur, texture etc). Voor inspiratie, zie [youtube](https://www.youtube.com/watch?v=Bspb9g9nTto). Een beknopte tutorial kun je ook [hier](https://gamedevelopment.tutsplus.com/tutorials/understanding-goal-based-vector-field-pathfinding--gamedev-9007) vinden.
 
 #### Requirements:
 
